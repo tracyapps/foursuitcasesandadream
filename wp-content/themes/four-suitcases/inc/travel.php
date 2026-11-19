@@ -38,6 +38,11 @@ function foursuitcases_travel_image( $image, $attributes = array(), $size = 'lar
 	echo '>';
 }
 
+function foursuitcases_travel_tag( $label ) {
+	$label = trim( (string) $label );
+	return '' === $label ? array() : array( 'data-tag' => $label );
+}
+
 function foursuitcases_travel_heading( $tag = 'h2', $class = 'travel-heading' ) {
 	$title = get_field( 'title' );
 	$script = get_field( 'script' );

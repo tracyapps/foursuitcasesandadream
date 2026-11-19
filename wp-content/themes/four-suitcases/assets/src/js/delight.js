@@ -5,7 +5,8 @@ const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const canHover = matchMedia("(hover: hover) and (pointer: fine)");
 const motionLevels = { calm: .45, lively: 1, max: 1.7 };
 const protectedContent = "[data-travel-protect], [data-travel-keep-clear], h1, h2, h3, p, li > p, figcaption, summary, a, button, label, input, select, textarea, iframe, video, [contenteditable], [data-nostamp]";
-const interactive = "a, button, summary, input, select, textarea, label, [contenteditable], [data-nostamp], [data-drag]";
+const interactive = "a, button, summary, input, select, textarea, label, iframe, video, [role='button'], [role='link'], [contenteditable], [data-nostamp], [data-drag]";
+const stampText = "h1, h2, h3, h4, h5, h6, p, li, dt, dd, figcaption, th, td, .travel-label, .travel-script, [data-travel-keep-clear]";
 const paletteNames = ["plum", "sea", "apricot", "sand", "sun", "coral", "sky", "mint"];
 const storage = {
   read(key, fallback) {
@@ -81,8 +82,6 @@ function setupStamps() {
     const radians = Math.abs(degrees) * Math.PI / 180;
     const halfWidth = (mark.offsetWidth * Math.cos(radians) + mark.offsetHeight * Math.sin(radians)) / 2;
     const halfHeight = (mark.offsetHeight * Math.cos(radians) + mark.offsetWidth * Math.sin(radians)) / 2;
-    const obstacles = safeAreas(document, bounds);
-    const candidates = [[0, 0], [-96, 0], [96, 0], [0, -96], [0, 96]];
     let position;
     let entranceScale = 1;
     for (const scale of reducedMotion.matches ? [1] : [1.9, 1.5, 1.2, 1]) {
@@ -93,17 +92,20 @@ function setupStamps() {
       const minY = Math.max(bounds.top, view.top) + ry;
       const maxY = Math.min(bounds.bottom, view.bottom) - ry;
       if (minX > maxX || minY > maxY) continue;
-      position = candidates.map(([dx, dy]) => [clamp(x + dx, minX, maxX), clamp(y + dy, minY, maxY)])
-        .find(([cx, cy]) => !obstacles.some(area => overlaps(rect(cx - rx, cy - ry, rx * 2, ry * 2), area, 6)));
-      if (position) {
-        entranceScale = scale;
-        break;
-      }
+      position = [clamp(x, minX, maxX), clamp(y, minY, maxY)];
+      entranceScale = scale;
+      break;
     }
     if (!position) {
       slot.remove();
+      const parentZone = zone.parentElement?.closest("[data-stamps]");
+      if (parentZone) stamp(parentZone, x, y);
       return;
     }
+    const rx = halfWidth * entranceScale;
+    const ry = halfHeight * entranceScale;
+    const footprint = rect(position[0] - rx, position[1] - ry, rx * 2, ry * 2);
+    if (safeAreas(zone, footprint, null, stampText).length) slot.classList.add("is-muted");
     slot.style.left = (position[0] - bounds.left) + "px";
     slot.style.top = (position[1] - bounds.top) + "px";
     slot.style.removeProperty("visibility");
@@ -114,14 +116,14 @@ function setupStamps() {
     setTimeout(() => {
       if (!slot.isConnected) return;
       if (reducedMotion.matches) slot.remove();
-      else mark.animate([{ opacity: .55 }, { opacity: 0 }], { duration: 2400, fill: "forwards" }).finished.then(() => slot.remove(), () => {});
+      else slot.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 2400, fill: "forwards" }).finished.then(() => slot.remove(), () => {});
     }, 14000);
   }
 
   document.addEventListener("click", event => {
-    if (!(event.target instanceof Element) || event.defaultPrevented || event.detail === 0 || event.target.closest(interactive)) return;
+    if (!(event.target instanceof Element) || event.defaultPrevented || event.detail === 0 || event.target.closest(interactive) || document.getSelection()?.isCollapsed === false) return;
     const zone = event.target.closest("[data-stamps]");
-    if (zone && !event.target.closest("[data-travel-protect]")) stamp(zone, event.clientX, event.clientY);
+    if (zone) stamp(zone, event.clientX, event.clientY);
   });
   return stamp;
 }

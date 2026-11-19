@@ -42,6 +42,7 @@
 	text-decoration: underline 2px var(--pop);
 	text-underline-offset: .36em;
 	font-weight: 650;
+	text-wrap: balance;
 }
 
 .travel-actions {
@@ -59,7 +60,7 @@
 .travel-paper-print {
 	position: relative;
 	background: var(--color-print);
-	padding: 5% 5% 17%;
+	padding: 5% 5% 2%;
 	box-shadow: var(--travel-contact-shadow);
 
 	img {
@@ -83,16 +84,11 @@
 }
 
 .travel-paper-print figcaption {
-	position: absolute;
-	bottom: 4%;
-	left: 5%;
-	right: 5%;
+	padding: 0.5em 0.25em 0.25em 0.25em;
 	color: #4a3a50;
 	font: 400 clamp(1.125rem,2vw,2.125rem)/1 var(--font-script);
 	text-align: center;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	line-height: 1;
 }
 
 [data-cut] {

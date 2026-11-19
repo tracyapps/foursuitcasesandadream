@@ -1,5 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
+$object = get_field( 'object' );
+$object_tag = foursuitcases_travel_tag( $object ? get_field( 'object_hover_tag' ) : 'Big shades, little shades' );
 $layout = foursuitcases_travel_choice( 'layout', array( 'pass', 'poster', 'banner' ), 'pass' );
 $link = get_field( 'link' );
 $places = preg_split( '/[\r\n,]+/', get_field( 'destinations' ) ?: 'Orlando, Juneau, Zion, Anaheim, Nassau, Yellowstone, Anywhere!', -1, PREG_SPLIT_NO_EMPTY );
@@ -21,7 +23,7 @@ if ( 'poster' === $layout ) :
 <?php endif; ?>
 <div class="travel-inner">
 	<div class="travel-cta-card">
-		<?php if ( 'banner' === $layout ) { foursuitcases_travel_image( get_field( 'object' ) ?: 'sunglasses-adult-pair', array( 'alt' => '', 'class' => 'travel-banner-art', 'data-tag' => 'Big shades, little shades', 'data-cut' => '' ) ); } ?>
+		<?php if ( 'banner' === $layout ) { foursuitcases_travel_image( $object ?: 'sunglasses-adult-pair', $object_tag + array( 'alt' => '', 'class' => 'travel-banner-art', 'data-cut' => '' ) ); } ?>
 		<div class="travel-cta-copy" data-travel-protect>
 			<?php foursuitcases_travel_intro(); ?>
 			<?php if ( 'pass' === $layout ) : ?>

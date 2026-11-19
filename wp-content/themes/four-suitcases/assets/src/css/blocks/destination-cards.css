@@ -42,7 +42,9 @@
 		}
 	}
 }
-
+.travel-section figure.travel-destination__print {
+	margin-bottom: 1.4rem;
+}
 .travel-destination__print img {
 	aspect-ratio: 4/4.4;
 	object-fit: cover;
@@ -244,7 +246,7 @@
 /********************************************************************************** tickets **/
 .travel-v2-cards--tickets {
 	.travel-destination-grid {
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 42rem), 1fr));
 		align-items: start;
 	}
 

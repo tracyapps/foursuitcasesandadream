@@ -31,14 +31,71 @@ if (savedTheme) {
 }
 
 if (menuToggle && primaryNav) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-    menuToggle.setAttribute("aria-expanded", String(!isOpen));
-    primaryNav.classList.toggle("is-open", !isOpen);
-    menuToggle.querySelector(".screen-reader-text").textContent = isOpen
-      ? window.foursuitcasesTheme?.labels?.openMenu || "Open menu"
-      : window.foursuitcasesTheme?.labels?.closeMenu || "Close menu";
+  let activeSubmenu;
+  const menuLabel = menuToggle.querySelector(".screen-reader-text");
+
+  function closeSubmenu(restoreFocus = false) {
+    if (!activeSubmenu) return;
+    const { button, list } = activeSubmenu;
+    button.setAttribute("aria-expanded", "false");
+    list.hidden = true;
+    activeSubmenu = undefined;
+    if (restoreFocus) button.focus();
+  }
+
+  function setMenuOpen(open) {
+    menuToggle.setAttribute("aria-expanded", String(open));
+    primaryNav.classList.toggle("is-open", open);
+    menuLabel.textContent = open
+      ? window.foursuitcasesTheme?.labels?.closeMenu || "Close menu"
+      : window.foursuitcasesTheme?.labels?.openMenu || "Open menu";
+    if (!open) closeSubmenu();
+  }
+
+  primaryNav.querySelectorAll("#primary-menu > li").forEach((item, index) => {
+    const link = item.querySelector(":scope > a");
+    const list = item.querySelector(":scope > .sub-menu");
+    if (!link || !list) return;
+
+    list.id ||= `primary-submenu-${index + 1}`;
+    list.hidden = true;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "primary-submenu-toggle";
+    button.setAttribute("aria-label", primaryNav.dataset.submenuLabel.replace("%s", () => link.textContent.trim()));
+    button.setAttribute("aria-controls", list.id);
+    button.setAttribute("aria-expanded", "false");
+    link.after(button);
+
+    button.addEventListener("click", () => {
+      const wasOpen = activeSubmenu?.button === button;
+      closeSubmenu();
+      if (wasOpen) return;
+      activeSubmenu = { button, list };
+      button.setAttribute("aria-expanded", "true");
+      list.hidden = false;
+    });
   });
+
+  menuToggle.addEventListener("click", () => setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true"));
+  document.addEventListener("click", event => {
+    if (activeSubmenu && !activeSubmenu.button.parentElement.contains(event.target)) closeSubmenu();
+  });
+  primaryNav.addEventListener("focusout", event => {
+    if (event.relatedTarget && activeSubmenu && !activeSubmenu.button.parentElement.contains(event.relatedTarget)) closeSubmenu();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape" || event.defaultPrevented) return;
+    if (activeSubmenu) {
+      event.preventDefault();
+      closeSubmenu(true);
+    } else if (primaryNav.classList.contains("is-open")) {
+      event.preventDefault();
+      setMenuOpen(false);
+      menuToggle.focus();
+    }
+  });
+  matchMedia("(min-width: 73.751rem)").addEventListener("change", () => setMenuOpen(false));
 }
 
 if (themeToggle) {
@@ -50,9 +107,5 @@ if (themeToggle) {
     setTheme(current === "dark" ? "light" : "dark");
   });
 }
-
-if (menuToggle && primaryNav) { document.addEventListener("keydown", event => { if (event.key === "Escape" && primaryNav.classList.contains("is-open")) { primaryNav.classList.remove("is-open"); menuToggle.setAttribute("aria-expanded", "false"); menuToggle.querySelector(".screen-reader-text").textContent=window.foursuitcasesTheme?.labels?.openMenu||"Open menu"; menuToggle.focus(); } }); }
-
-if(menuToggle&&primaryNav){const breakpoint=matchMedia("(min-width: 73.751rem)");breakpoint.addEventListener("change",()=>{primaryNav.classList.remove("is-open");menuToggle.setAttribute("aria-expanded","false");menuToggle.querySelector(".screen-reader-text").textContent=window.foursuitcasesTheme?.labels?.openMenu||"Open menu";});}
 
 initDelight();

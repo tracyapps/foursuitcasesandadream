@@ -1,5 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
+$object = get_field( 'object' );
+$object_tag = foursuitcases_travel_tag( $object ? get_field( 'object_hover_tag' ) : 'Always carry-on only' );
 $layout = foursuitcases_travel_choice( 'layout', array( 'portrait', 'passport' ), 'portrait' );
 $signature = get_field( 'signature' ) ?: 'Lindsay';
 $caption = get_field( 'caption' ) ?: 'Hi, I’m Lindsay!';
@@ -14,7 +16,7 @@ foursuitcases_travel_open( 'about', $block, $layout );
 			<p class="travel-script"><?php echo esc_html( $signature ); ?></p>
 			<p class="travel-passport-code" aria-hidden="true">P&lt;FSA&lt;FAMILY&lt;&lt;ADVENTURES&lt;&lt;&lt;</p>
 		<?php else :
-			foursuitcases_travel_image( get_field( 'object' ) ?: 'backpack-cognac-leather', array( 'alt' => '', 'class' => 'travel-about-object', 'data-tag' => 'Always carry-on only', 'data-cut' => '', 'data-tilt' => '8', 'data-mouse' => '20', 'data-depth' => '.11' ) );
+			foursuitcases_travel_image( $object ?: 'backpack-cognac-leather', $object_tag + array( 'alt' => '', 'class' => 'travel-about-object', 'data-cut' => '', 'data-tilt' => '8', 'data-mouse' => '20', 'data-depth' => '.11' ) );
 		endif; ?>
 	</div>
 	<div class="travel-about-copy" data-travel-protect>
@@ -31,4 +33,5 @@ foursuitcases_travel_open( 'about', $block, $layout );
 		<?php foursuitcases_travel_link( get_field( 'link' ), 'travel-text-link' ); ?>
 	</div>
 </div>
+<div class="travel-inner"><?php get_template_part( 'template-parts/travel/certifications' ); ?></div>
 </section>

@@ -1,6 +1,11 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+// Pages can supply the same editable card summary as posts.
+add_action( 'init', static function () {
+	add_post_type_support( 'page', 'excerpt' );
+} );
+
 function start_travel_destination_overrides() {
 	return array(
 		'title'       => 'Title',

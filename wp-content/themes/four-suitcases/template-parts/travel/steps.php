@@ -33,7 +33,7 @@ foursuitcases_travel_open( 'steps', $block );
 			<li data-step data-travel-protect>
 				<div class="travel-step-copy"><p class="travel-eyebrow"><?php echo esc_html( sprintf( 'Step %02d of %02d', $index + 1, count( $steps ) ) ); ?></p>
 				<h3><?php echo esc_html( $step['title'] ?? '' ); ?></h3><p><?php echo nl2br( esc_html( $step['text'] ?? '' ) ); ?></p></div>
-				<?php foursuitcases_travel_image( $step['cutout'] ?? 0, array( 'alt' => '', 'data-step-img' => '', 'data-cut' => '' ) ); ?>
+				<?php foursuitcases_travel_image( $step['cutout'] ?? 0, foursuitcases_travel_tag( $step['cutout_hover_tag'] ?? '' ) + array( 'alt' => '', 'data-step-img' => '', 'data-cut' => '' ) ); ?>
 			</li>
 			<?php endforeach; ?>
 		</ol>

@@ -33,7 +33,7 @@
 					<span class="screen-reader-text"><?php esc_html_e( 'Open menu', 'four-suitcases' ); ?></span>
 				</button>
 
-				<nav class="primary-navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'four-suitcases' ); ?>">
+				<nav class="primary-navigation" data-submenu-label="<?php esc_attr_e( 'More pages under %s', 'four-suitcases' ); ?>" aria-label="<?php esc_attr_e( 'Primary menu', 'four-suitcases' ); ?>">
 					<?php
 					wp_nav_menu(
 						array(
@@ -58,4 +58,4 @@
 		</div>
 	</header>
 
-	<main id="site-main" class="site-main">
+	<main id="site-main" class="site-main" data-stamps>

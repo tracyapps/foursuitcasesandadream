@@ -1,39 +1,4 @@
-/* might not need this. delete after test.
-.acf-block-hero {
-	pa!**!dding-block: var(--space-section);
-	background: var(--hero-bg, var(--color-surface));
-}
 
-.acf-block-hero__inner {
-	width: var(--layout-content);
-	margin-inline: auto;
-	display: grid;
-	grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr);
-	gap: var(--space-lg);
-	align-items: center;
-}
-
-.acf-block-hero__eyebrow {
-	color: var(--color-accent-strong);
-	font-weight: 700;
-	text-transform: uppercase;
-}
-
-.acf-block-hero__title {
-	max-width: 14ch;
-	font-size: clamp(2.25rem, 6vw, 4.75rem);
-}
-
-.acf-block-hero__media img {
-	width: 100%;
-	border-radius: var(--radius-md);
-}
-
-@media (max-width: 48rem) {
-	.acf-block-hero__inner {
-		grid-template-columns: 1fr;
-	}
-}*/
 /* Heroes */
 .travel-v2-hero {
 	color: var(--ink);
@@ -48,6 +13,8 @@
 
 .travel-v2-hero--split {
 	background: linear-gradient(150deg, var(--wash) 30%, var(--color-bg) 92%);
+
+
 }
 
 .travel-v2-hero--bleed {
@@ -71,7 +38,10 @@
 }
 
 .travel-hero-size--compact {
-	padding-block: clamp(2.5rem, 5vw, 5rem);
+	&.travel-section {
+		padding-block: clamp(2.1rem, 5vw, 5rem);
+	}
+
 
 	h1 {
 		font-size: clamp(2.75rem, 5vw, 6.5rem);
@@ -209,6 +179,15 @@
 	.travel-hero-cut--second {
 		left: 0;
 		bottom: 0;
+		width: min(32%, 14rem);
+
+		&.travel-hero-cut--square {
+			width: min(45%, clamp(8rem, 21vw, 19rem));
+		}
+
+		&.travel-hero-cut--landscape {
+			width: min(64%, clamp(10rem, 28vw, 25rem));
+		}
 	}
 }
 

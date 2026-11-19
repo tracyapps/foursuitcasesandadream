@@ -1,4 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit;
+$object_tag = trim( (string) get_field( 'object_hover_tag' ) );
+$object_attributes = array( 'class' => 'travel-object', 'alt' => '' );
+if ( '' !== $object_tag ) {
+	$object_attributes['data-tag'] = $object_tag;
+}
 $photo = get_field( 'photo' );
 $dimensions = wp_get_attachment_metadata( $photo );
 $portrait = ! empty( $dimensions['height'] ) && $dimensions['height'] > $dimensions['width'];
@@ -10,5 +15,5 @@ $portrait = ! empty( $dimensions['height'] ) && $dimensions['height'] > $dimensi
 		<p><?php echo esc_html( get_field( 'description' ) ); ?></p>
 		<?php $cta = get_field( 'link' ); if ( ! empty( $cta['url'] ) ) : ?><a class="travel-button" href="<?php echo esc_url( $cta['url'] ); ?>"><?php echo esc_html( $cta['title'] ?: 'Explore' ); ?> <span aria-hidden="true">↗</span></a><?php endif; ?>
 	</div>
-	<?php echo wp_get_attachment_image( get_field( 'object' ), 'medium_large', false, array( 'class' => 'travel-object', 'alt' => '' ) ); ?>
+	<?php echo wp_get_attachment_image( get_field( 'object' ), 'medium_large', false, $object_attributes ); ?>
 </section>

@@ -51,6 +51,7 @@ $bags = array(
 					<?php foursuitcases_social_links(); ?>
 				</div>
 			</div>
+			<?php get_template_part( 'template-parts/travel/certifications', null, array( 'presentation' => 'footer' ) ); ?>
 			<div class="travel-footer-bottom" data-travel-protect>
 				<?php foursuitcases_extra_menu( 'legal', __( 'Legal navigation', 'four-suitcases' ) ); ?>
 				<?php if ( get_theme_mod( 'start-site-search', true ) ) { get_search_form( array( 'aria_label' => __( 'Footer site search', 'four-suitcases' ) ) ); } ?>

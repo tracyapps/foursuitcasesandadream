@@ -21,19 +21,19 @@ function start_travel_specs() {
 	$size = array( 'roomy' => 'Roomy', 'cozy' => 'Cozy' );
 	return array(
 		'hero' => array( 'Travel page hero', 'sun', array( 'collage', 'bleed', 'split' ), $heading + array(
-			'photo' => 'image', 'link' => 'link', 'palette' => $palettes, 'object' => 'image', 'parallax' => 'true_false', 'light_leak' => 'true_false',
+			'photo' => 'image', 'link' => 'link', 'palette' => $palettes, 'object' => 'image', 'object_hover_tag' => 'text', 'parallax' => 'true_false', 'light_leak' => 'true_false',
 			'size' => array( 'tall', 'compact' ), 'second_photo' => 'image', 'caption' => 'text', 'second_caption' => 'text',
-			'secondary_link' => 'link', 'cutout' => 'image', 'unpack' => 'true_false',
+			'secondary_link' => 'link', 'cutout' => 'image', 'cutout_hover_tag' => 'text', 'unpack' => 'true_false',
 		) ),
 		'card' => array( 'Destination card', 'sand', array(), $card ),
 		'cards' => array( 'Destination cards', 'plum', array( 'prints', 'postcards', 'tags', 'tickets' ), $heading + array(
 			'background' => $background, 'cards' => array( 'rows' => $destination_card ),
 		) ),
 		'steps' => array( 'How it works', 'coral', array(), $heading + array(
-			'steps' => array( 'rows' => array( 'title' => 'text', 'text' => 'textarea', 'cutout' => 'image' ) ),
+			'steps' => array( 'rows' => array( 'title' => 'text', 'text' => 'textarea', 'cutout' => 'image', 'cutout_hover_tag' => 'text' ) ),
 		) ),
 		'about' => array( 'About Lindsay', 'apricot', array( 'portrait', 'passport' ), $heading + array(
-			'background' => $background, 'photo' => 'image', 'caption' => 'text', 'object' => 'image', 'signature' => 'text', 'link' => 'link',
+			'background' => $background, 'photo' => 'image', 'caption' => 'text', 'object' => 'image', 'object_hover_tag' => 'text', 'signature' => 'text', 'link' => 'link',
 			'points' => array( 'rows' => array( 'title' => 'text', 'text' => 'text', 'palette' => $palettes ) ),
 		) ),
 		'testimonials' => array( 'Travel testimonials', 'apricot', array( 'spotlight', 'wall', 'simple' ), $heading + array(
@@ -42,10 +42,10 @@ function start_travel_specs() {
 		'gallery' => array( 'Travel photo gallery', 'sun', array( 'scatter', 'grid', 'strip' ), $heading + array( 'background' => $background, 'photos' => 'gallery' ) ),
 		'posts' => array( 'Travel journal posts', 'sand', array( 'magazine', 'prints', 'list' ), $heading + array( 'count' => 'number', 'category' => 'taxonomy', 'loop' => 'true_false' ) ),
 		'faq' => array( 'Travel FAQs', 'sea', array( 'split', 'accordion' ), $heading + array(
-			'background' => $background, 'size' => $size, 'object' => 'image', 'questions' => array( 'rows' => array( 'question' => 'text', 'answer' => 'wysiwyg' ) ),
+			'background' => $background, 'size' => $size, 'object' => 'image', 'object_hover_tag' => 'text', 'questions' => array( 'rows' => array( 'question' => 'text', 'answer' => 'wysiwyg' ) ),
 		) ),
-		'cta' => array( 'Travel call to action', 'sky', array( 'pass', 'poster', 'banner' ), $heading + array( 'link' => 'link', 'destinations' => 'textarea', 'object' => 'image' ) ),
-		'divider' => array( 'Travel divider', 'coral', array( 'route', 'marquee', 'scallop' ), array( 'from' => array( 'plain' => 'Page background' ) + $palettes, 'to' => $palettes, 'words' => 'textarea', 'start_label' => 'text', 'end_label' => 'text' ) ),
+		'cta' => array( 'Travel call to action', 'sky', array( 'pass', 'poster', 'banner' ), $heading + array( 'link' => 'link', 'destinations' => 'textarea', 'object' => 'image', 'object_hover_tag' => 'text' ) ),
+		'divider' => array( 'Travel divider', 'coral', array( 'route', 'marquee', 'scallop', 'certifications' ), array( 'from' => array( 'plain' => 'Page background' ) + $palettes, 'to' => $palettes, 'words' => 'textarea', 'start_label' => 'text', 'end_label' => 'text' ) ),
 	);
 }
 
@@ -68,7 +68,7 @@ function start_travel_field( $prefix, $name, $spec, $default = '' ) {
 						$sub_field['label'] = 'Override ' . strtolower( $labels[ substr( $sub_name, strlen( 'override_' ) ) ] );
 					} elseif ( 'link' === $sub_name ) {
 						$sub_field['label'] = 'Destination link';
-						$sub_field['instructions'] = 'Choose a published page or post on this site to use its title, tagline, featured image and excerpt. Travel Hero details fill in when those fields are empty. For external links, turn on the overrides to supply your own details.';
+					$sub_field['instructions'] = 'Each override controls one field. With overrides off, a linked page supplies its WordPress title, Page Header → Page Tagline, Featured image, and Excerpt. The Travel page hero can supply a missing tagline, image, or description. For external links or cards without a link, enter custom details using the overrides.';
 					}
 				}
 				$field['sub_fields'][] = $sub_field;
@@ -81,6 +81,15 @@ function start_travel_field( $prefix, $name, $spec, $default = '' ) {
 			);
 		}
 		return $field;
+	}
+	if ( str_ends_with( $name, '_hover_tag' ) ) {
+		$image = str_replace( '_hover_tag', '', $name );
+		$field['label'] = ucfirst( $image ) . ' hover tag';
+		$field['instructions'] = 'Leave blank to hide the hover tag.';
+		$field['maxlength'] = 100;
+		$field['conditional_logic'] = array( array( array(
+			'field' => $prefix . '_' . $image, 'operator' => '!=empty', 'value' => '',
+		) ) );
 	}
 	$field['type'] = $spec;
 	switch ( $spec ) {

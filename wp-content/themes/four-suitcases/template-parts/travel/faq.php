@@ -1,5 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
+$object = get_field( 'object' );
+$object_tag = foursuitcases_travel_tag( $object ? get_field( 'object_hover_tag' ) : 'Every answer, dog-eared' );
 $layout = foursuitcases_travel_choice( 'layout', array( 'split', 'accordion' ), 'split' );
 $group = wp_unique_id( 'travel-faq-' );
 foursuitcases_travel_open( 'faq', $block, $layout );
@@ -8,7 +10,7 @@ foursuitcases_travel_open( 'faq', $block, $layout );
 	<header class="travel-section-intro" data-travel-protect>
 		<?php foursuitcases_travel_intro(); ?>
 		<?php if ( 'split' === $layout ) :
-			foursuitcases_travel_image( get_field( 'object' ) ?: 'travel-guide-worn', array( 'alt' => '', 'class' => 'travel-faq-object', 'data-tag' => 'Every answer, dog-eared', 'data-cut' => '', 'data-tilt' => '8', 'data-rot' => '-8' ) );
+			foursuitcases_travel_image( $object ?: 'travel-guide-worn', $object_tag + array( 'alt' => '', 'class' => 'travel-faq-object', 'data-cut' => '', 'data-tilt' => '8', 'data-rot' => '-8' ) );
 			foursuitcases_travel_compass( 'faq' );
 		endif; ?>
 	</header>

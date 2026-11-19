@@ -43,7 +43,9 @@
 	bottom: -.65rem;
 	translate: -50%;
 }
-
+.travel-v2-divider--marquee {
+	z-index: 3;
+}
 .travel-divider-ticker {
 	background: var(--ink);
 	color: var(--wash);
@@ -53,7 +55,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: clamp(.9rem,3vw,3rem);
-		font: italic 500 clamp(1.5rem,4vw,4rem)/1.15 var(--font-serif);
+		font: italic 500 clamp(1.25rem,4vw,2rem)/1.15 var(--font-serif);
 		padding: .6em 0;
 	}
 

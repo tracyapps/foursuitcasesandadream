@@ -169,3 +169,4 @@ add_action( 'acf/init', function () {
 } );
 
 require_once __DIR__ . '/passport-stamps.php';
+require_once __DIR__ . '/certifications.php';
