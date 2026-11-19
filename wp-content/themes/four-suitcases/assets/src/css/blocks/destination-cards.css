@@ -1,0 +1,359 @@
+/* Destination cards */
+.travel-destination-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.125rem), 1fr));
+	gap: clamp(1.25rem, 3vw, 3rem);
+}
+
+.travel-destination {
+	min-width: 0;
+}
+
+.travel-destination__copy {
+	display: grid;
+	align-content: start;
+	justify-items: start;
+	gap: .65rem;
+	padding: clamp(.85rem, 2vw, 1.6rem);
+
+	p:not(.travel-eyebrow,.travel-script) {
+		font-size: clamp(1rem, 1.1vw, 1.2rem);
+	}
+}
+
+.travel-destination__photo {
+	position: relative;
+	overflow: clip;
+
+	:is(img,video) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	video {
+		position: absolute;
+		inset: 0;
+		visibility: hidden;
+
+		&.playing {
+			visibility: visible;
+		}
+	}
+}
+
+.travel-destination__print img {
+	aspect-ratio: 4/4.4;
+	object-fit: cover;
+}
+
+.travel-v2-cards--prints .travel-destination__copy {
+	padding-inline: .25rem;
+}
+
+/********************************************************************************** postcard **/
+.travel-v2-cards--postcards {
+	.travel-destination-grid {
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+	}
+
+	.travel-destination__face {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, .31fr);
+		min-height: 15rem;
+		color: var(--ink);
+		background: var(--color-print);
+		color: #482451;
+		box-shadow: var(--travel-contact-shadow);
+		border-radius: .25rem;
+	}
+
+	.travel-postcard__address {
+		display: grid;
+		align-content: center;
+		justify-items: center;
+		gap: 1rem;
+		border-inline-start: 2px dotted #9c887c;
+		margin-block: 1.2rem;
+		padding: .7rem;
+		font: 400 clamp(1rem, 1.8vw, 1.75rem)/1.16 var(--font-script);
+		text-align: center;
+
+		img {
+			width: 74%;
+			aspect-ratio: 1;
+			object-fit: cover;
+			padding: 4px;
+			border: 2px dotted #ad837f;
+			rotate: 7deg;
+		}
+	}
+
+	.travel-destination__copy {
+		padding-bottom: 3.7rem;
+	}
+}
+
+.travel-postcard {
+	display: grid;
+	perspective: 1050px;
+}
+
+.travel-postcard__front {
+	display: none;
+}
+
+.travel-destination {
+	&.is-flippable {
+		perspective: 1150px;
+		min-height: 100%;
+	}
+
+	&.is-flippable .travel-postcard {
+		min-height: 100%;
+		transform-style: preserve-3d;
+		transition: transform .9s cubic-bezier(.3, 1.25, .5, 1);
+	}
+
+	&.is-flippable .travel-postcard__front {
+		display: grid;
+		position: relative;
+		min-height: 15rem;
+		grid-area: 1/1;
+		align-content: end;
+		aspect-ratio: 3/2;
+		overflow: clip;
+		padding: 1.25rem 1.25rem 3.55rem;
+		border: .6rem solid var(--color-print);
+		background: #302438;
+		color: #fffaf0;
+		backface-visibility: hidden;
+		box-shadow: var(--travel-contact-shadow);
+	}
+}
+
+.travel-postcard__front {
+	img, &::after {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&::after {
+		content: "";
+		background: linear-gradient(0deg, #1b1324ed, transparent 80%);
+	}
+
+	:is(strong,.travel-postcard__greeting) {
+		position: relative;
+		z-index: 1;
+	}
+
+	strong {
+		font: 600 clamp(1.55rem, 3.2vw, 3rem)/1 var(--font-serif);
+	}
+}
+
+.travel-postcard__greeting {
+	position: absolute !important;
+	top: 1rem;
+	left: 1rem;
+	font: 400 clamp(1.5rem, 2.7vw, 2.5rem)/1 var(--font-script);
+	text-shadow: 0 1px 8px #20152d;
+}
+
+.travel-destination {
+	&.is-flippable .travel-destination__face {
+		grid-area: 1/1;
+		transform: rotateY(180deg);
+		backface-visibility: hidden;
+	}
+
+	&.is-flippable.is-flipped .travel-postcard, &.is-flippable:has(.travel-cover-link:focus-visible) .travel-postcard {
+		transform: rotateY(180deg);
+	}
+}
+
+.travel-flip-toggle {
+	position: absolute;
+	right: 1rem;
+	bottom: 1rem;
+	z-index: 3;
+	min-height: 2.75rem;
+	padding: .4rem .85rem;
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	background: var(--color-print);
+	color: #482451;
+	cursor: pointer;
+	font: 650 .875rem/1 var(--font-sans);
+}
+
+/********************************************************************************** travel tags **/
+.travel-v2-cards--tags {
+	.travel-destination-grid {
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.875rem), 1fr));
+		row-gap: 3rem;
+	}
+
+	.travel-destination {
+		filter: var(--travel-cut-shadow);
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: -1.55rem;
+			left: calc(50% - .4rem);
+			width: .8rem;
+			height: 3rem;
+			border: 2px solid var(--color-gold);
+			border-radius: 50%;
+			rotate: 16deg;
+			z-index: 1;
+			pointer-events: none;
+		}
+	}
+
+	.travel-destination__face {
+		height: 100%;
+		padding: 3.2rem 0 .5rem;
+		color: var(--ink);
+		background: radial-gradient(circle at 50% 1.45rem, var(--color-bg) 5px, var(--color-gold) 6px, var(--color-gold) 8px, var(--wash) 9px);
+		clip-path: polygon(22% 0, 78% 0, 100% 9%, 100% 100%, 0 100%, 0 9%);
+	}
+
+	.travel-destination__copy {
+		margin: .8rem 2rem 1rem;
+		padding-inline: 0;
+		border-top: 1px dashed color-mix(in oklab, currentColor 35%, transparent);
+	}
+
+	.travel-destination__photo {
+		aspect-ratio: 5/4.8;
+		width: 100%;
+		margin-top: -2em;
+		mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+		-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+	}
+}
+
+/********************************************************************************** tickets **/
+.travel-v2-cards--tickets {
+	.travel-destination-grid {
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+		align-items: start;
+	}
+
+	.travel-destination {
+		filter: var(--travel-cut-shadow);
+	}
+
+	.travel-destination__face {
+		display: grid;
+		min-height: 12rem;
+		color: var(--ink);
+		background: var(--wash);
+		border-radius: var(--radius-ticket);
+	}
+
+	.travel-destination--horizontal {
+		.travel-ticket__stub {
+			writing-mode: vertical-rl;
+			border-inline: 0;
+			border-top: 0;
+			border-left: 2px dashed color-mix(in oklab, currentColor 34%, transparent);
+
+			.travel-barcode {
+				writing-mode: horizontal-tb;
+				width: 1rem;
+				height: 2.5rem;
+			}
+		}
+
+		.travel-destination__face {
+			grid-template-columns: minmax(4rem, 30%) minmax(0, 1fr) 3.6rem;
+			--notch-x: calc(100% - 3.6rem);
+			mask: radial-gradient(circle at var(--notch-x) 0, transparent 11px, #000 11.5px) top/100% 51% no-repeat, radial-gradient(circle at var(--notch-x) 100%, transparent 11px, #000 11.5px) bottom/100% 51% no-repeat;
+		}
+	}
+
+	.travel-destination--vertical {
+		.travel-destination__face {
+			--notch-y: calc(100% - 4.375rem);
+			mask: radial-gradient(circle at 0 var(--notch-y), transparent 11px, #000 11.5px) left/51% 100% no-repeat, radial-gradient(circle at 100% var(--notch-y), transparent 11px, #000 11.5px) right/51% 100% no-repeat;
+		}
+
+		.travel-destination__photo {
+			max-height: 40rem;
+		}
+	}
+}
+
+.travel-ticket__stub {
+	display: flex;
+	gap: .9rem;
+	justify-content: center;
+	align-items: center;
+	min-height: 4.375rem;
+	padding: .7rem;
+	border-top: 2px dashed color-mix(in oklab, currentColor 34%, transparent);
+}
+
+@media (max-width: 27rem) {
+	.travel-v2-cards--tickets .travel-destination--horizontal .travel-destination__face {
+		grid-template-columns: minmax(3.1rem, 23%) minmax(0, 1fr) 2.75rem;
+		--notch-x: calc(100% - 2.75rem);
+	}
+
+	.travel-ticket__stub {
+		gap: .55rem;
+	}
+}
+
+/******** Postcard details and photo motion ********/
+.travel-v2-cards--postcards .travel-destination__copy p:not(.travel-eyebrow,.travel-script) {
+	font: italic 450 clamp(1rem,1.25vw,1.25rem)/1.45 var(--font-serif);
+}
+
+.travel-postcard__kicker {
+	position: relative;
+	z-index: 1;
+	color: #ffd166;
+}
+
+.travel-postcard__postmark {
+	display: grid;
+	place-content: center;
+	width: clamp(2.8rem,6vw,5.1rem);
+	max-width: 100%;
+	aspect-ratio: 1;
+	border: 3px double color-mix(in oklab,var(--pop) 75%,#482451);
+	border-radius: 50%;
+	rotate: -10deg;
+	font: 650 clamp(.4rem,1vw,.62rem)/1.15 var(--font-sans);
+	letter-spacing: .13em;
+	text-transform: uppercase;
+}
+
+.travel-postcard__address-line {
+	width: 100%;
+	border-block-end: 1px solid #a89181;
+	padding-block-end: .15rem;
+	font: 600 .62rem/1.2 var(--font-sans);
+	text-transform: uppercase;
+	letter-spacing: .14em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.travel-destination__photo :is(img,video) {
+		transition: transform .28s ease-out;
+	}
+
+	.travel-destination:is(:hover,:focus-within) .travel-destination__photo :is(img,video) {
+		transform: translate(var(--pan-x,0px),var(--pan-y,0px)) scale(1.075);
+	}
+}

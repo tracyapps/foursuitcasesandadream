@@ -1,0 +1,356 @@
+/* Boarding-pass stepper */
+/* Each step has its own copy, cutout and number on the boarding pass. */
+.travel-v2-steps {
+	color: var(--color-text);
+	background: var(--color-bg);
+}
+
+.travel-steps-scroll {
+	--step-progress: 0;
+	--step-top: calc(var(--travel-header-height) + var(--wp-admin--admin-bar--height, 0px));
+}
+
+.travel-steps-stage {
+	display: grid;
+	width: min(100%, var(--layout-full));
+	margin-inline: auto;
+	padding: 1rem var(--travel-gutter);
+}
+
+.travel-step-panels {
+	display: grid;
+	gap: clamp(1rem, 4vw, 3rem);
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	min-width: 0;
+
+	> li {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, .42fr);
+		gap: clamp(.75rem, 2.8vw, 2.5rem);
+		align-items: center;
+		min-width: 0;
+	}
+
+	> li:not(:has(img)) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.travel-step-copy {
+	min-width: 0;
+}
+
+.travel-v2-steps .travel-step-panels h3 {
+	max-width: 13ch;
+	margin-block: .17em .32em;
+	font-size: clamp(2.1rem, 4.6vw, 6rem);
+	line-height: .96;
+}
+
+.travel-step-copy > p:last-child {
+	max-width: 42ch;
+	text-wrap: pretty;
+}
+
+.travel-step-panels > li img {
+	justify-self: center;
+	align-self: start;
+	width: 100%;
+	max-height: min(31svh, 22rem);
+	object-fit: contain;
+	pointer-events: none;
+}
+
+.travel-steps-scroll {
+	&:not(.is-enhanced) [data-step] {
+		padding-block: 1.25rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	&.is-enhanced {
+		height: calc((var(--step-count) * 85 + 30) * 1svh);
+	}
+
+	&.is-enhanced .travel-steps-stage {
+		position: sticky;
+		top: var(--step-top);
+		min-height: calc(100svh - var(--step-top));
+		grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+		align-content: center;
+		align-items: center;
+		gap: clamp(1rem, 4vw, 4rem);
+	}
+
+	&.is-enhanced .travel-steps-stage::after {
+		content: "";
+		position: absolute;
+		z-index: 3;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 4px;
+		background: linear-gradient(to right, var(--pop) calc(var(--step-progress) * 100%), var(--color-border) 0);
+	}
+
+	&.is-enhanced [data-step] {
+		grid-area: 1/1;
+		visibility: hidden;
+		pointer-events: none;
+		transition: visibility .48s;
+	}
+
+	&.is-enhanced [data-step].is-current {
+		visibility: visible;
+		pointer-events: auto;
+		z-index: 3;
+	}
+
+	&.is-enhanced .travel-step-copy {
+		opacity: 0;
+		translate: 0 2rem;
+		transition: opacity .38s ease, translate .58s cubic-bezier(.2, .8, .2, 1);
+	}
+
+	&.is-enhanced [data-step-position="before"] .travel-step-copy {
+		translate: 0 -2rem;
+	}
+
+	&.is-enhanced [data-step] img {
+		opacity: 0;
+		transform: translate(24%, 1rem) rotate(19deg) scale(.8);
+		transition: opacity .42s, transform .7s cubic-bezier(.22, .85, .25, 1.13);
+	}
+
+	&.is-enhanced [data-step-position="before"] img {
+		transform: translate(-14%, -1rem) rotate(-13deg) scale(.82);
+	}
+
+	&.is-enhanced .is-current .travel-step-copy {
+		opacity: 1;
+		translate: none;
+	}
+
+	&.is-enhanced [data-step].is-current img {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.travel-boarding-pass {
+	background: var(--color-surface);
+	color: var(--color-text);
+	overflow: clip;
+	border-radius: var(--radius-ticket);
+	box-shadow: var(--travel-contact-shadow);
+	border: 1px solid var(--color-border);
+}
+
+.travel-pass-band {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: .5rem;
+	background: var(--ink);
+	color: var(--wash);
+	padding: .8rem 1.3rem;
+}
+
+.travel-pass-airline {
+	font: 400 clamp(1.15rem, 1.7vw, 1.65rem)/1 var(--font-script);
+	letter-spacing: 0;
+	text-transform: none;
+}
+
+.travel-boarding-pass__body {
+	padding: clamp(.75rem, 2.4vw, 2rem);
+}
+
+.travel-boarding-pass__route {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+	gap: .75rem;
+	font: 650 clamp(1.8rem, 4vw, 4rem)/1 var(--font-serif);
+
+	> span:last-child {
+		text-align: end;
+	}
+
+	small {
+		display: block;
+		margin-block-end: .3rem;
+		color: var(--color-muted);
+	}
+}
+
+.travel-boarding-pass__stops {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: .3rem;
+	margin-block: 1.7rem .8rem;
+	isolation: isolate;
+
+	&::before, &::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		z-index: -1;
+		top: 50%;
+		width: 100%;
+		border-top: 2px dashed var(--color-border);
+	}
+
+	&::after {
+		width: calc(var(--step-progress) * 100%);
+		border: 0;
+		background: var(--pop);
+		height: 3px;
+	}
+}
+
+.travel-boarding-pass__stops button, .travel-carousel-controls button {
+	min-width: 2.75rem;
+	min-height: 2.75rem;
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.travel-boarding-pass__stops button[aria-current="step"], .travel-carousel-controls button[aria-current="true"] {
+	background: var(--ink);
+	color: var(--wash);
+}
+
+.travel-boarding-pass__stops button.is-past {
+	background: var(--wash);
+	color: var(--ink);
+}
+
+.travel-boarding-pass__guide {
+	display: flex;
+	align-items: center;
+	gap: clamp(.8rem, 2vw, 1.8rem);
+}
+
+.travel-boarding-pass__number {
+	position: relative;
+	flex: 0 0 1.28em;
+	height: 1em;
+	overflow: clip;
+	color: color-mix(in oklab, var(--pop) 55%, currentColor);
+	font: 700 clamp(3.25rem, 7vw, 10rem)/1 var(--font-serif);
+	font-variant-numeric: tabular-nums;
+
+	span {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		translate: 0 100%;
+		transition: translate .58s cubic-bezier(.28, .78, .25, 1), opacity .35s;
+	}
+
+	[data-step-position="before"] {
+		translate: 0 -100%;
+	}
+
+	.is-current {
+		opacity: 1;
+		translate: none;
+	}
+}
+
+.travel-boarding-pass__guide {
+	ol {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		font-size: clamp(.88rem, 1.25vw, 1.15rem);
+	}
+
+	li {
+		color: var(--color-muted);
+		transition: color .25s;
+	}
+
+	li.is-current {
+		color: var(--color-text);
+		font-weight: 650;
+	}
+}
+
+.travel-boarding-pass__stub {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: .75rem;
+	padding: 1rem 1.3rem;
+	border-top: 2px dashed var(--color-border);
+	font-size: .9rem;
+}
+
+.travel-boarding-pass__stub small, .travel-cta-route small {
+	display: block;
+	font: 700 .68rem/1.5 var(--font-sans);
+	letter-spacing: .18em;
+	text-transform: uppercase;
+}
+
+@media (max-width: 56.25rem) {
+	.travel-steps-scroll.is-enhanced .travel-steps-stage {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.travel-boarding-pass__guide ol, .travel-boarding-pass__stub {
+		display: none;
+	}
+
+	.travel-boarding-pass__number {
+		flex-basis: 100%;
+		font-size: clamp(2.15rem, 6vw, 3.4rem);
+	}
+
+	.travel-boarding-pass__stops {
+		margin-block: 1.35rem .25rem;
+	}
+}
+
+@media (max-width: 30rem) {
+	.travel-step-panels {
+		> li {
+			grid-template-columns: minmax(0, 1fr);
+			gap: .75rem;
+		}
+
+		> li img {
+			grid-row: 1;
+			justify-self: end;
+			width: min(48%, 9rem);
+			max-height: 7.5rem;
+		}
+	}
+
+	.travel-v2-steps .travel-step-panels h3 {
+		font-size: clamp(1.9rem, 8vw, 3.1rem);
+	}
+}
+
+.travel-step-runner {
+	position: absolute;
+	z-index: -1;
+	width: 2.25rem;
+	height: 2.25rem;
+	object-fit: contain;
+	left: clamp(1.125rem,calc(var(--step-progress) * 100%),calc(100% - 1.125rem));
+	bottom: calc(100% - .25rem);
+	translate: -50%;
+	pointer-events: none;
+}

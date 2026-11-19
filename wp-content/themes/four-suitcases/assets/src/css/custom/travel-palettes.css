@@ -1,0 +1,110 @@
+/* Travel palettes and shared design values */
+:root {
+	--travel-shadow: 48,30,56;
+	--travel-blend: multiply;
+	--travel-gutter: clamp(1rem,4vw,4rem);
+	--travel-header-height: 4.25rem;
+	--travel-contact-shadow: 0 1px 1px rgba(var(--travel-shadow),.22), 0 3px 5px -2px rgba(var(--travel-shadow),.2), 0 7px 12px -6px rgba(var(--travel-shadow),.34);
+	--travel-cut-shadow: drop-shadow(0 2px 1.5px rgba(var(--travel-shadow),.28)) drop-shadow(0 7px 12px rgba(var(--travel-shadow),.34));
+}
+
+:root[data-theme="dark"] {
+	--travel-shadow: 0,0,0;
+	--travel-blend: screen;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--travel-shadow: 0,0,0;
+		--travel-blend: screen;
+	}
+}
+
+.travel-plum {
+	--wash: var(--color-plum-surface);
+	--ink: var(--color-plum-ink);
+	--pop: var(--color-plum-pop);
+}
+
+.travel-sea {
+	--wash: var(--color-sea-surface);
+	--ink: var(--color-sea-ink);
+	--pop: var(--color-sea-pop);
+}
+
+.travel-apricot {
+	--wash: var(--color-apricot-surface);
+	--ink: var(--color-apricot-ink);
+	--pop: var(--color-apricot-pop);
+}
+
+.travel-sand {
+	--wash: var(--color-sand-surface);
+	--ink: var(--color-sand-ink);
+	--pop: var(--color-sand-pop);
+}
+
+.travel-sun {
+	--wash: var(--color-sun-surface);
+	--ink: var(--color-sun-ink);
+	--pop: var(--color-sun-pop);
+}
+
+.travel-coral {
+	--wash: var(--color-coral-surface);
+	--ink: var(--color-coral-ink);
+	--pop: var(--color-coral-pop);
+}
+
+.travel-sky {
+	--wash: var(--color-sky-surface);
+	--ink: var(--color-sky-ink);
+	--pop: var(--color-sky-pop);
+}
+
+.travel-mint {
+	--wash: var(--color-mint-surface);
+	--ink: var(--color-mint-ink);
+	--pop: var(--color-mint-pop);
+}
+
+.travel-night {
+	--wash: var(--color-night-surface);
+	--ink: var(--color-night-ink);
+	--pop: var(--color-night-pop);
+}
+
+.travel-plain {
+	--wash: var(--color-bg);
+	--ink: var(--color-text);
+	--pop: var(--color-accent-strong);
+}
+
+.wp-block-group[class*="is-style-travel-"] {
+	padding: clamp(1.5rem,4vw,3rem);
+	border-radius: var(--radius-md);
+}
+
+.is-style-travel-plum {
+	background: var(--color-plum-surface);
+	color: var(--color-plum-ink);
+}
+
+.is-style-travel-sea {
+	background: var(--color-sea-surface);
+	color: var(--color-sea-ink);
+}
+
+.is-style-travel-apricot {
+	background: var(--color-apricot-surface);
+	color: var(--color-apricot-ink);
+}
+
+.is-style-travel-sand {
+	background: var(--color-sand-surface);
+	color: var(--color-sand-ink);
+}
+
+.wp-block-group[class*="is-style-travel-"] a {
+	color: inherit;
+}

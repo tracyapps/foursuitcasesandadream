@@ -1,0 +1,268 @@
+/* Decorative layers and motion */
+/* The safe-area layer sits above each section's decorative canvas. */
+.travel-section [data-travel-protect],.travel-site-footer [data-travel-protect] {
+	position: relative;
+	z-index: 2;
+}
+
+.travel-stamp-layer {
+	position: absolute;
+	inset: 0;
+	overflow: clip;
+	z-index: -1;
+	pointer-events: none;
+
+	.travel-stamp {
+		position: absolute;
+		transform: translate(-50%,-50%);
+		mix-blend-mode: var(--travel-blend);
+		opacity: .55;
+	}
+
+	.travel-stamp--round {
+		width: 8rem;
+	}
+}
+
+.travel-unpack,.travel-compass {
+	border: 0;
+	background: none;
+	padding: 0;
+	cursor: pointer;
+}
+
+.travel-unpack img,.travel-compass img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.travel-unpack[hidden], .travel-compass[hidden], .travel-flip-toggle[hidden], .travel-carousel-controls[hidden], .travel-boarding-pass[hidden], .travel-v2-testimonials--spotlight .travel-quote[hidden] {
+	display: none;
+}
+
+.travel-unpack--fallback,.travel-unpack--decor {
+	pointer-events: none;
+}
+
+.travel-unpack:not([hidden]) + .travel-unpack--fallback {
+	display: none;
+}
+
+.travel-pop-item {
+	position: fixed;
+	z-index: 9;
+	display: block;
+	height: auto;
+	max-width: none;
+	max-height: none;
+	pointer-events: none;
+	filter: var(--travel-cut-shadow);
+}
+
+.travel-tag-tip {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 120;
+	pointer-events: none;
+	max-width: min(15rem,calc(100vw - 2rem));
+	padding: .55rem 1rem .55rem 1.85rem;
+	color: #49332b;
+	font: italic 500 .875rem/1.2 var(--font-serif);
+	background: radial-gradient(circle at 15px 50%,transparent 4.5px,#a87a22 5px,#a87a22 6.5px,#f7e9c6 7px);
+	clip-path: polygon(14px 0,100% 0,100% 100%,14px 100%,0 50%);
+
+	&.is-left {
+		padding: .55rem 1.85rem .55rem 1rem;
+		background: radial-gradient(circle at calc(100% - 15px) 50%,transparent 4.5px,#a87a22 5px,#a87a22 6.5px,#f7e9c6 7px);
+		clip-path: polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);
+	}
+}
+
+.travel-stamp-slot {
+	position: absolute;
+	width: 0;
+	height: 0;
+	transform-origin: 0 0;
+
+	.travel-stamp {
+		left: 50%;
+		top: 50%;
+	}
+}
+
+.travel-unpack-tray {
+	grid-column: 1/-1;
+	min-height: 6.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: clamp(.15rem,2vw,1.3rem);
+	padding-block: 1rem;
+}
+
+.travel-unpack-tray__item {
+	display: block;
+	width: min(16%,6rem);
+	aspect-ratio: 1;
+	object-fit: contain;
+	filter: var(--travel-cut-shadow);
+
+	&:nth-child(odd) {
+		margin-top: 1rem;
+		rotate: -11deg;
+	}
+
+	&:nth-child(even) {
+		margin-bottom: 1rem;
+		rotate: 11deg;
+	}
+}
+
+.travel-pop-item {
+	object-fit: contain;
+}
+
+:where([data-rot]) {
+	rotate: var(--travel-rotation,0deg);
+}
+
+.travel-unpack-tray {
+	pointer-events: none;
+}
+
+.travel-pop-item[hidden] {
+	display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.travel-section *, .travel-section *::before,.travel-section *::after,.travel-brand img {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+
+[data-rot="-8"] {
+	--travel-rotation: -8deg;
+}
+
+[data-rot="-7"] {
+	--travel-rotation: -7deg;
+}
+
+[data-rot="-5"] {
+	--travel-rotation: -5deg;
+}
+
+[data-rot="-4"] {
+	--travel-rotation: -4deg;
+}
+
+[data-rot="-3"] {
+	--travel-rotation: -3deg;
+}
+
+[data-rot="-2.5"] {
+	--travel-rotation: -2.5deg;
+}
+
+[data-rot="-1.5"] {
+	--travel-rotation: -1.5deg;
+}
+
+[data-rot="1.5"] {
+	--travel-rotation: 1.5deg;
+}
+
+[data-rot="2.5"] {
+	--travel-rotation: 2.5deg;
+}
+
+[data-rot="3"] {
+	--travel-rotation: 3deg;
+}
+
+[data-rot="4"] {
+	--travel-rotation: 4deg;
+}
+
+[data-rot="5"] {
+	--travel-rotation: 5deg;
+}
+
+[data-rot="6"] {
+	--travel-rotation: 6deg;
+}
+
+[data-rot="7"] {
+	--travel-rotation: 7deg;
+}
+
+[data-rot="8"] {
+	--travel-rotation: 8deg;
+}
+
+.is-style-travel-city,.is-style-travel-beach {
+	position: relative;
+	isolation: isolate;
+	padding-bottom: clamp(6rem,14vw,14rem);
+}
+
+:is(.is-style-travel-city,.is-style-travel-beach)::after {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	pointer-events: none;
+	width: clamp(8rem,32vw,38rem);
+	aspect-ratio: 1.5;
+	bottom: -1rem;
+	background: var(--collection) center / contain no-repeat;
+	filter: drop-shadow(0 .7rem .45rem #20192b30);
+}
+
+.is-style-travel-city {
+	--collection: image-set(url("../../travel/luggage-family-city-2-small.webp") 1x,url("../../travel/luggage-family-city-2.webp") 2x);
+}
+
+.is-style-travel-beach {
+	--collection: image-set(url("../../travel/luggage-family-beach-2-small.webp") 1x,url("../../travel/luggage-family-beach-2.webp") 2x);
+}
+
+.is-style-travel-city::after {
+	right: calc((100% - 100vw)/2 - 1.8vw);
+	rotate: 5deg;
+}
+
+.is-style-travel-beach::after {
+	left: calc((100% - 100vw)/2 - 2vw);
+	rotate: -6deg;
+}
+
+:is(.is-style-travel-city,.is-style-travel-beach)::before {
+	content: "";
+	position: absolute;
+	pointer-events: none;
+	bottom: 5%;
+	left: 10%;
+	right: 12%;
+	height: clamp(3rem,8vw,8rem);
+	border: 2px dashed var(--color-muted);
+	border-radius: 0 0 60% 50%;
+	border-top: 0;
+	opacity: .45;
+	rotate: -3deg;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:is(.is-style-travel-city,.is-style-travel-beach)::after {
+		translate: 0 calc(-.55 * var(--travel-depth,0px));
+	}
+}
+
+/* Hoverable cutouts stay behind protected copy and keep their touch fallback. */
+@media (hover: hover) {
+	.travel-hero-cut[data-tag],.travel-about-object[data-tag],.travel-poster-art [data-tag],.travel-banner-art[data-tag] {
+		pointer-events: auto;
+	}
+}

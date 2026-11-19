@@ -1,0 +1,154 @@
+/* About Lindsay */
+.travel-about-spread {
+	display: grid;
+	grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+	gap: clamp(2rem,7vw,8rem);
+	align-items: center;
+}
+
+.travel-about-image {
+	width: min(100%,36rem);
+	margin-inline: auto;
+}
+
+.travel-about-print {
+	width: min(91%,31rem);
+	margin-inline: auto !important;
+}
+
+.travel-v2-about--portrait .travel-about-print::after {
+	content: "";
+	position: absolute;
+	top: 12%;
+	right: -6%;
+	width: 30%;
+	height: 1.5rem;
+	background: #decb9bb8;
+	rotate: 33deg;
+	pointer-events: none;
+}
+
+.travel-about-print img {
+	aspect-ratio: 4/5;
+	object-fit: cover;
+	object-position: center 35%;
+}
+
+.travel-about-object {
+	position: absolute;
+	bottom: -10%;
+	left: -4%;
+	width: clamp(6rem,19vw,19rem);
+	pointer-events: none;
+}
+
+.travel-about-points {
+	display: grid;
+	grid-template-columns: repeat(auto-fit,minmax(min(100%,14rem),1fr));
+	gap: 1.35rem;
+	padding: 0;
+	margin: 2rem 0;
+	list-style: none;
+
+	li {
+		display: grid;
+		grid-template-columns: auto minmax(0,1fr);
+		gap: .75rem;
+		align-items: start;
+	}
+
+	li p {
+		font-size: .94em;
+	}
+}
+
+.travel-about-number {
+	display: grid;
+	place-items: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border-radius: .55rem;
+	rotate: -6deg;
+	background: var(--wash);
+	color: var(--ink);
+	font-weight: 700;
+	font-size: .83rem;
+}
+
+.travel-about-copy .travel-about-signature {
+	font-size: clamp(2.75rem,5vw,5.75rem);
+	margin-block: 1rem;
+}
+
+/******** Passport ********/
+.travel-v2-about--passport {
+	.travel-about-spread {
+		width: min(calc(100% - 2 * var(--travel-gutter)),96rem);
+		align-items: stretch;
+		gap: 0;
+		background: #3b2a46;
+		padding: clamp(.55rem,1.8vw,1.4rem);
+		border-radius: .95rem;
+		box-shadow: var(--travel-contact-shadow);
+	}
+
+	:is(.travel-about-image,.travel-about-copy) {
+		width: 100%;
+		padding: clamp(1rem,4vw,4rem);
+		color: #482451;
+		background: repeating-radial-gradient(circle at 30% 40%,#f5efe2 0 6px,#efe6d4 6px 7px);
+	}
+
+	.travel-about-image {
+		border-radius: .45rem 0 0 .45rem;
+		box-shadow: inset -.6rem 0 1rem -.6rem #30243890;
+	}
+
+	.travel-about-copy {
+		border-radius: 0 .45rem .45rem 0;
+		box-shadow: inset .6rem 0 1rem -.6rem #30243890;
+	}
+
+	.travel-about-print {
+		width: min(70%,21rem);
+		margin-block: 2rem !important;
+	}
+}
+
+.travel-passport-fields {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 2rem;
+
+	dt {
+		text-transform: uppercase;
+		letter-spacing: .15em;
+		font-size: .7em;
+		font-weight: 700;
+	}
+
+	dd {
+		margin: 0;
+	}
+}
+
+.travel-passport-code {
+	margin-top: 1.5rem !important;
+	overflow-wrap: anywhere;
+	font-family: monospace;
+}
+
+@media (max-width: 48rem) {
+	.travel-about-spread {
+		grid-template-columns: minmax(0,1fr);
+	}
+
+	.travel-about-object {
+		left: 0;
+	}
+
+	.travel-v2-about--passport :is(.travel-about-image,.travel-about-copy) {
+		border-radius: .35rem;
+		box-shadow: none;
+	}
+}

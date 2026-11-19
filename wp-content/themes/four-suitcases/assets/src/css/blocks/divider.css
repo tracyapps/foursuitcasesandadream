@@ -1,0 +1,76 @@
+/* Travel dividers */
+.travel-v2-divider {
+	padding: 0;
+}
+
+.travel-route {
+	display: grid;
+	grid-template-columns: auto minmax(0,1fr) auto;
+	gap: clamp(.5rem,4vw,3rem);
+	align-items: center;
+	min-height: clamp(6rem,14vw,14rem);
+	color: var(--ink);
+}
+
+.travel-v2-divider--route {
+	background: var(--wash);
+}
+
+.travel-route > span {
+	font: 400 clamp(1.4rem,4.5vw,4.2rem)/1 var(--font-script);
+}
+
+.travel-route__line {
+	position: relative;
+	border-top: 2px dashed color-mix(in oklab,currentColor 38%,transparent);
+
+	&::before {
+		content: "";
+		position: absolute;
+		height: 3px;
+		top: -2px;
+		left: 0;
+		width: calc(var(--route-progress,0) * 100%);
+		background: var(--pop);
+	}
+}
+
+.travel-route img {
+	position: absolute;
+	width: clamp(2rem,9vw,6rem);
+	max-width: 65%;
+	left: calc(4% + 88% * var(--route-progress,0));
+	bottom: -.65rem;
+	translate: -50%;
+}
+
+.travel-divider-ticker {
+	background: var(--ink);
+	color: var(--wash);
+	rotate: -1.8deg;
+
+	span {
+		display: inline-flex;
+		align-items: center;
+		gap: clamp(.9rem,3vw,3rem);
+		font: italic 500 clamp(1.5rem,4vw,4rem)/1.15 var(--font-serif);
+		padding: .6em 0;
+	}
+
+	span::after {
+		content: "✧";
+		color: var(--pop);
+		font: 1em var(--font-serif);
+	}
+}
+
+.travel-scallop {
+	height: 2.125rem;
+	background: var(--wash);
+
+	> div {
+		height: 100%;
+		background: var(--wash);
+		mask: radial-gradient(circle at 26px 0,transparent 25px,#000 25.5px) 0 0/52px 100% repeat-x;
+	}
+}

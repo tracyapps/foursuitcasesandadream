@@ -4,21 +4,27 @@
 @import "./utilities.css";
 
 .editor-styles-wrapper {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-}
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-family: var(--font-sans);
 
-.editor-styles-wrapper .wp-block {
-  max-width: var(--layout-content);
-}
+	.wp-block {
+		max-width: var(--layout-content);
+	}
 
-.editor-styles-wrapper .wp-block[data-align="wide"] {
-  max-width: var(--layout-wide);
+	.wp-block[data-align="wide"] {
+		max-width: var(--layout-wide);
+	}
 }
 
 @import "./custom.css";
 
-.editor-styles-wrapper [data-spotlight] [data-quote] ~ [data-quote] {
-  display: none;
+.editor-styles-wrapper {
+	.wp-block[data-fsa-width] {
+		max-width: 100%;
+	}
+
+	[data-spotlight] [data-quote] ~ [data-quote] {
+		display: none;
+	}
 }

@@ -1,0 +1,115 @@
+/* Compass rose hunt */
+.travel-compass {
+	position: absolute;
+	min-block-size: 2.75rem;
+	inline-size: 2.75rem;
+	padding: .55rem;
+	z-index: 4;
+	right: 0;
+	bottom: 0;
+
+	img {
+		opacity: .48;
+	}
+
+	&:hover img, &:focus-visible img, &.is-found img {
+		opacity: 1;
+		filter: drop-shadow(0 0 .3rem #f5c84a);
+	}
+}
+
+.travel-compass--intro {
+	bottom: auto;
+	top: -1.75rem;
+	right: -.5rem;
+}
+
+.travel-compass--faq {
+	bottom: 0;
+	left: min(14rem,55%);
+	right: auto;
+}
+
+.travel-compass--cta {
+	bottom: -1.2rem;
+	right: -.55rem;
+}
+
+.travel-compass--hero {
+	right: 3%;
+	top: 3%;
+	bottom: auto;
+}
+
+.travel-hunt-status {
+	display: flex;
+	align-items: center;
+	gap: .65rem;
+	width: fit-content;
+	max-width: 100%;
+	margin-block: 1.75rem .5rem;
+	color: inherit;
+	font-size: .9rem;
+
+	button {
+		background: transparent;
+		color: inherit;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		cursor: pointer;
+		padding: .35rem .65rem;
+	}
+}
+
+.travel-compass-toast {
+	position: fixed;
+	z-index: 100;
+	inset: auto .75rem .75rem;
+	width: fit-content;
+	max-width: calc(100% - 1.5rem);
+	margin-inline: auto;
+	padding: .75rem 1rem;
+	border-radius: var(--radius-md);
+	background: var(--color-night-surface);
+	color: var(--color-night-ink);
+	pointer-events: none;
+	box-shadow: var(--travel-contact-shadow);
+}
+
+.travel-compass--footer {
+	right: .55rem;
+}
+
+.travel-hunt-more {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+	width: 100%;
+	min-height: 3rem;
+
+	&:not(:has(.travel-compass:not([hidden]))) {
+		display: none;
+	}
+
+	.travel-compass {
+		position: static;
+	}
+}
+
+.travel-compass--footer-center {
+	margin-inline: auto;
+}
+
+.travel-compass--footer-right {
+	margin-inline-start: auto;
+}
+
+.travel-hunt-status[hidden] {
+	display: none;
+}
+
+.travel-v2-hero--bleed .travel-compass--hero {
+	left: 3%;
+	right: auto;
+	top: .5rem;
+}

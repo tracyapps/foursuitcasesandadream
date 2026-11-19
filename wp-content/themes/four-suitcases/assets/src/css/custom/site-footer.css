@@ -1,0 +1,109 @@
+/* Travel site footer and baggage claim */
+.travel-site-footer {
+	position: relative;
+	isolation: isolate;
+	padding: 0;
+	color: var(--ink);
+	background: var(--wash);
+
+	a {
+		color: inherit;
+	}
+
+	a:hover {
+		text-decoration: underline;
+		text-underline-offset: .22em;
+	}
+}
+
+.travel-baggage {
+	position: relative;
+	z-index: 1;
+
+	.travel-label {
+		padding-block: .85rem;
+	}
+
+	.travel-label span {
+		color: var(--pop);
+	}
+}
+
+.travel-baggage__belt {
+	background: repeating-linear-gradient(90deg,#3a3242 0 46px,#2a2330 46px 48px);
+	border-block: 6px solid #514855;
+	padding: clamp(1rem,2vw,2.1rem) 0;
+
+	.travel-ticker__group {
+		gap: clamp(.65rem,2vw,1.8rem);
+	}
+}
+
+.travel-bag {
+	inline-size: clamp(5rem,14vw,13rem);
+
+	img {
+		width: 100%;
+		height: clamp(4rem,10vw,9rem);
+		object-fit: contain;
+	}
+}
+
+.travel-footer-content {
+	padding-block: clamp(3.1rem,7vw,7rem) clamp(2rem,4vw,4rem);
+}
+
+.travel-footer-heading {
+	margin-block-end: clamp(2rem,5vw,5rem);
+}
+
+.travel-footer-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit,minmax(min(100%,14rem),1fr));
+	gap: clamp(1.5rem,4vw,4rem);
+
+	h3 {
+		font-size: clamp(1.3rem,2vw,1.85rem);
+	}
+
+	:is(.footer-menu,.travel-footer-links) {
+		display: grid;
+		gap: .55rem;
+		padding: 0;
+		margin: 1rem 0;
+		list-style: none;
+	}
+}
+
+.travel-footer-links a {
+	text-decoration: none;
+}
+
+.travel-footer-bottom {
+	margin-block-start: clamp(1.5rem,4vw,3rem);
+	padding-block-start: 1rem;
+	border-top: 1px solid color-mix(in oklab,currentColor 25%,transparent);
+
+	p {
+		margin-block: 1rem;
+	}
+
+	[data-motion-toggle] {
+		background: none;
+		color: inherit;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		padding: .45rem .8rem;
+		cursor: pointer;
+	}
+}
+
+.travel-site-footer {
+	[type="search"] {
+		color: var(--color-text);
+	}
+
+	.social-links__link {
+		color: inherit;
+	}
+}

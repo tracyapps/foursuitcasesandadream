@@ -1,0 +1,241 @@
+/* Travel site header and navigation */
+.travel-brand {
+	display: inline-flex;
+	align-items: center;
+	gap: .55rem;
+	color: var(--color-text);
+	text-decoration: none;
+	white-space: nowrap;
+
+	span {
+		font: 2rem/.86 'Great Vibes',cursive;
+		text-align: center;
+	}
+
+	small {
+		font-size: .83em;
+	}
+}
+
+.site-main {
+	overflow-x: clip;
+}
+
+.site-header__inner {
+	width: var(--layout-wide);
+	padding-block: .65rem;
+}
+
+.primary-menu {
+	gap: .4rem clamp(.65rem,1.2vw,1.15rem);
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.travel-brand {
+	line-height: 1;
+
+	svg {
+		flex-shrink: 0;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.travel-brand {
+		svg {
+			transition: transform .3s ease;
+		}
+
+		&:is(:hover,:focus-visible) svg {
+			transform: rotate(15deg);
+		}
+	}
+}
+
+.site-header {
+	background: color-mix(in oklab,var(--color-bg) 82%,transparent);
+	backdrop-filter: blur(14px) saturate(1.4);
+}
+
+body.admin-bar .site-header {
+	top: var(--wp-admin--admin-bar--height,32px);
+}
+
+.site-header__inner {
+	min-height: var(--travel-header-height);
+	padding-block: .55rem;
+}
+
+.travel-brand {
+	img {
+		flex: 0 0 auto;
+		width: 2.875rem;
+		height: auto;
+		transition: rotate .55s;
+	}
+
+	&:hover img, &:focus-visible img {
+		rotate: 135deg;
+	}
+
+	span {
+		font-family: var(--font-script);
+	}
+}
+
+.primary-menu {
+	font-size: 1rem;
+	font-weight: 450;
+
+	.current-menu-item > a {
+		position: relative;
+	}
+
+	.current-menu-item > a::after {
+		content: "";
+		position: absolute;
+		bottom: -.6rem;
+		left: calc(50% - 3px);
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--color-coral-pop);
+	}
+}
+
+.travel-header-pass {
+	display: inline-flex;
+	align-items: center;
+	gap: .65rem;
+	padding: .63rem 1.05rem;
+	border-radius: .4rem;
+	color: var(--color-bg);
+	background: var(--color-text);
+	text-decoration: none;
+	white-space: nowrap;
+	font: 650 1rem/1.2 var(--font-sans);
+	mask: radial-gradient(circle at 0 50%,transparent 5px,#000 5.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 5px,#000 5.5px) right/51% 100% no-repeat;
+
+	&::after {
+		content: "↗" / "";
+		border-inline-start: 1px dashed;
+		padding-inline-start: .55rem;
+	}
+
+	&:is(:hover,:focus-visible) {
+		color: var(--color-bg);
+		text-decoration: underline;
+	}
+
+	&:focus-visible {
+		outline: 0;
+		box-shadow: inset 0 0 0 3px var(--color-accent-strong);
+	}
+}
+
+.theme-toggle {
+	flex: 0 0 auto;
+	border-radius: 50%;
+	width: 2.625rem;
+	height: 2.625rem;
+	cursor: pointer;
+}
+
+.theme-toggle__icon {
+	width: 1.15rem;
+	height: 1.15rem;
+	border: 0;
+	border-radius: 50%;
+	background: #f5c84a;
+	box-shadow: 0 0 .5rem #e9ae55a0;
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon {
+	box-shadow: inset -.375rem -.1875rem 0 #f1e9da;
+	background: transparent;
+}
+
+.travel-plan-menu-item:not(:has(.sub-menu)) {
+	display: none;
+}
+
+@media (max-width: 73.75rem) {
+	.has-js {
+		.menu-toggle {
+			display: inline-grid;
+			flex: 0 0 auto;
+			cursor: pointer;
+		}
+
+		.primary-navigation {
+			position: absolute;
+			inset: 100% 0 auto;
+			display: none;
+			background: var(--color-surface);
+			border-block-end: 1px solid var(--color-border);
+			box-shadow: var(--shadow-soft);
+			max-height: 75dvh;
+			overflow: auto;
+		}
+
+		.primary-navigation.is-open {
+			display: block;
+		}
+	}
+
+	.primary-menu {
+		width: var(--layout-content);
+		margin-inline: auto;
+		padding-block: var(--space-md);
+		display: grid;
+
+		.current-menu-item > a::after {
+			bottom: auto;
+			top: 50%;
+			left: auto;
+			right: -.8rem;
+		}
+	}
+}
+
+@media (max-width: 36rem) {
+	.site-header__inner {
+		width: calc(100% - 1rem);
+		gap: .35rem;
+	}
+
+	.travel-brand {
+		gap: .3rem;
+
+		img {
+			width: 2rem;
+		}
+
+		span {
+			font-size: clamp(1.25rem,6vw,1.6rem);
+		}
+	}
+
+	.travel-header-pass {
+		padding: .55rem .62rem;
+		font-size: .79rem;
+
+		&::after {
+			display: none;
+		}
+	}
+}
+
+@media (max-width: 21rem) {
+	.site-header__inner:has(.primary-navigation) .travel-header-pass {
+		display: none;
+	}
+
+	.travel-plan-menu-item {
+		display: list-item !important;
+	}
+}
+
+html {
+	scroll-padding-top: calc(var(--travel-header-height) + var(--wp-admin--admin-bar--height,0px) + .4rem);
+}

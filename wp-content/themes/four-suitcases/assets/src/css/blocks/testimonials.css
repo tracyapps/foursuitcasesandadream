@@ -1,0 +1,174 @@
+/* Testimonials */
+.travel-quotes__track {
+	display: grid;
+	gap: 1.5rem;
+}
+
+.travel-v2-testimonials--simple .travel-quotes__track {
+	grid-template-columns: repeat(auto-fit,minmax(min(100%,17rem),1fr));
+}
+
+.travel-quote {
+	position: relative;
+}
+
+.travel-quote__note {
+	background: var(--wash);
+	color: var(--ink);
+	padding: clamp(1.3rem,3.5vw,3rem);
+	box-shadow: var(--travel-contact-shadow);
+	border-radius: .3rem;
+}
+
+.travel-quote {
+	blockquote {
+		padding: 0;
+		border: 0;
+	}
+
+	blockquote p {
+		font: italic 450 clamp(1.625rem,2.4vw,3.25rem)/1.28 var(--font-serif);
+	}
+}
+
+.travel-size--cozy .travel-quote blockquote p {
+	font-size: clamp(1.25rem,1.9vw,2rem);
+}
+
+.travel-quote figcaption {
+	display: grid;
+	gap: .2rem;
+	margin-block-start: 1.15rem;
+	font-size: .9em;
+}
+
+.travel-v2-testimonials--simple {
+	.travel-quote__note {
+		height: 100%;
+		border-top: 4px solid var(--pop);
+	}
+
+	.travel-quote__note::before {
+		display: none;
+	}
+}
+
+/******** Wall and spotlight ********/
+.travel-v2-testimonials--wall {
+	.travel-quotes__track {
+		display: block;
+		columns: 23.75rem;
+		column-gap: 2rem;
+	}
+
+	&.travel-size--cozy .travel-quotes__track {
+		columns: 18.75rem;
+	}
+
+	.travel-quote {
+		break-inside: avoid;
+		padding: 1.1rem .25rem;
+	}
+
+	.travel-quote__note {
+		position: relative;
+		rotate: -1.6deg;
+	}
+
+	.travel-quote:nth-child(even) .travel-quote__note {
+		rotate: 1.6deg;
+	}
+}
+
+.travel-v2-testimonials--spotlight {
+	.travel-quote {
+		display: grid;
+		align-items: center;
+		grid-template-columns: minmax(0,1fr) minmax(0,.55fr);
+		gap: clamp(1.5rem,5vw,5rem);
+	}
+
+	.travel-quote:not(:has(.travel-quote__photo)) {
+		grid-template-columns: minmax(0,1fr);
+	}
+
+	.travel-quote__note::before {
+		content: "“";
+		display: block;
+		position: static;
+		width: auto;
+		height: .55em;
+		rotate: none;
+		background: none;
+		color: var(--pop);
+		font: 400 clamp(4rem,10vw,9rem)/.9 var(--font-script);
+	}
+
+	.travel-quote__note {
+		box-shadow: none;
+		background: transparent;
+		color: inherit;
+	}
+
+	figcaption strong {
+		justify-self: start;
+		border-radius: 999px;
+		padding: .3em .8em;
+		background: var(--wash);
+		color: var(--ink);
+	}
+}
+
+@media (max-width: 45rem) {
+	.travel-v2-testimonials--spotlight .travel-quote {
+		grid-template-columns: minmax(0,1fr);
+	}
+
+	.travel-quote__photo {
+		width: min(65%,20rem);
+		justify-self: center;
+	}
+}
+
+.travel-v2-testimonials--wall {
+	.travel-quote__note {
+		color: #3a2c40;
+		background: var(--color-print);
+	}
+
+	.travel-quote figcaption strong {
+		color: #572e66;
+		font: 400 clamp(1.75rem,2.2vw,2.375rem)/1 var(--font-script);
+	}
+
+	.travel-quote figcaption span {
+		color: #675d6e;
+		font: 700 .75rem/1.4 var(--font-sans);
+		text-transform: uppercase;
+		letter-spacing: .15em;
+	}
+}
+
+.travel-quote__stack {
+	position: relative;
+	isolation: isolate;
+	justify-self: center;
+	width: min(100%,29rem);
+	padding: .85rem;
+
+	img {
+		aspect-ratio: 1;
+		object-fit: cover;
+	}
+
+	.travel-quote__photo-back {
+		position: absolute;
+		z-index: -1;
+		inset: 0 4% 4% 0;
+		pointer-events: none;
+	}
+
+	.travel-quote__photo {
+		width: 100%;
+	}
+}

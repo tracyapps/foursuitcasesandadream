@@ -1,0 +1,169 @@
+/* Travel gallery */
+.travel-gallery {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(auto-fit,minmax(min(100%,15rem),1fr));
+	gap: 1.5rem;
+}
+
+.travel-v2-gallery--grid {
+	.travel-gallery {
+		display: block;
+		columns: 18.75rem;
+	}
+
+	.travel-gallery__item {
+		break-inside: avoid;
+		margin-bottom: 1.25rem;
+		padding-top: .75rem;
+	}
+
+	.travel-paper-print {
+		padding: 8px 8px 13%;
+	}
+
+	.travel-paper-print::before {
+		display: none;
+	}
+}
+
+[data-drag] {
+	cursor: grab;
+	touch-action: pan-y;
+}
+
+[data-drag].is-dragging {
+	cursor: grabbing;
+	user-select: none;
+}
+
+[data-drag] img {
+	-webkit-user-drag: none;
+}
+
+@media (min-width: 55rem) {
+	.travel-v2-gallery--scatter {
+		.travel-gallery {
+			display: grid;
+			grid-template-columns: repeat(4,minmax(0,1fr));
+			padding: 2rem 0;
+			gap: clamp(.75rem,2vw,2rem);
+		}
+
+		.travel-gallery__item:nth-child(8n + 2) {
+			margin-top: 18%;
+		}
+
+		.travel-gallery__item:nth-child(8n + 4) {
+			margin-top: -8%;
+		}
+
+		.travel-gallery__item:nth-child(8n + 6) {
+			margin-top: -10%;
+		}
+
+		.travel-gallery__item:nth-child(8n + 8) {
+			margin-top: 12%;
+		}
+	}
+}
+
+/******** Filmstrip and tabletop ********/
+.travel-film {
+	padding-block: clamp(.8rem,2.8vw,2.15rem);
+	rotate: -1.5deg;
+	background: repeating-linear-gradient(90deg,#e4d9ca 0 1rem,transparent 1rem 1.8rem) top .5rem left/100% .45rem no-repeat,repeating-linear-gradient(90deg,#e4d9ca 0 1rem,transparent 1rem 1.8rem) bottom .5rem left/100% .45rem no-repeat,#1b1620;
+
+	img {
+		width: clamp(9rem,24vw,26rem);
+		aspect-ratio: 1.55;
+		object-fit: cover;
+	}
+
+	&:not(.is-ticking) {
+		overflow: auto;
+	}
+
+	&:not(.is-ticking) [aria-hidden="true"] {
+		display: none;
+	}
+}
+
+@media (min-width: 55rem) {
+	.travel-v2-gallery--scatter .travel-gallery--table {
+		display: block;
+		height: clamp(35rem,58vw,71.875rem);
+		padding: 0;
+	}
+
+	.travel-gallery--table {
+		.travel-gallery__item[data-travel-protect] {
+			position: absolute;
+			left: var(--table-x);
+			top: var(--table-y);
+			width: var(--table-w);
+			margin: 0;
+		}
+
+		.travel-gallery__item:nth-child(1) {
+			--table-x: 2%;
+			--table-y: 4%;
+			--table-w: 22%;
+			--print-ratio: 4/5;
+		}
+
+		.travel-gallery__item:nth-child(2) {
+			--table-x: 25%;
+			--table-y: 0%;
+			--table-w: 19%;
+			--print-ratio: 1;
+		}
+
+		.travel-gallery__item:nth-child(3) {
+			--table-x: 46%;
+			--table-y: 6%;
+			--table-w: 23%;
+			--print-ratio: 4/3;
+		}
+
+		.travel-gallery__item:nth-child(4) {
+			--table-x: 73%;
+			--table-y: 2%;
+			--table-w: 22%;
+			--print-ratio: 4/5;
+		}
+
+		.travel-gallery__item:nth-child(5) {
+			--table-x: 4%;
+			--table-y: 53%;
+			--table-w: 24%;
+			--print-ratio: 4/3;
+		}
+
+		.travel-gallery__item:nth-child(6) {
+			--table-x: 30%;
+			--table-y: 46%;
+			--table-w: 20%;
+			--print-ratio: 1;
+		}
+
+		.travel-gallery__item:nth-child(7) {
+			--table-x: 53%;
+			--table-y: 52%;
+			--table-w: 22%;
+			--print-ratio: 4/3;
+		}
+
+		.travel-gallery__item:nth-child(8) {
+			--table-x: 78%;
+			--table-y: 51%;
+			--table-w: 19%;
+			--print-ratio: 4/5;
+		}
+
+		.travel-gallery__item img {
+			aspect-ratio: var(--print-ratio);
+			object-fit: cover;
+		}
+	}
+}

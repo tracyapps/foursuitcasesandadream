@@ -1,0 +1,142 @@
+/* Shared buttons, photo prints and ticket details */
+.travel-pass-button {
+	display: inline-flex;
+	align-items: stretch;
+	width: fit-content;
+	max-width: 100%;
+	border-radius: .5rem;
+	background-color: var(--pass-bg,var(--ink));
+	color: var(--pass-text,var(--wash));
+	text-decoration: none;
+	font: 650 1.125rem/1.2 var(--font-sans);
+
+	&:hover, &:focus-visible {
+		color: var(--pass-text,var(--wash));
+		text-decoration: underline;
+	}
+
+	> span:first-child {
+		padding: 1.0625rem 1.25rem 1.0625rem 1.625rem;
+		overflow-wrap: anywhere;
+	}
+
+	> span + span {
+		display: grid;
+		place-items: center;
+		padding: 1.0625rem 1.375rem 1.0625rem 1rem;
+		border-inline-start: 2px dashed color-mix(in oklab, currentColor 45%, transparent);
+	}
+
+	& {
+		mask: radial-gradient(circle at 0 50%,transparent 8px,#000 8.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 8px,#000 8.5px) right/51% 100% no-repeat;
+	}
+
+	&:focus-visible {
+		outline: 0;
+		box-shadow: inset 0 0 0 3px var(--pass-text,var(--wash)),inset 0 0 0 6px var(--pass-bg,var(--ink));
+	}
+}
+
+.travel-text-link {
+	color: inherit;
+	text-decoration: underline 2px var(--pop);
+	text-underline-offset: .36em;
+	font-weight: 650;
+}
+
+.travel-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 1.5rem;
+	align-items: center;
+	margin-block-start: 1.6rem;
+
+	&:empty {
+		display: none;
+	}
+}
+
+.travel-paper-print {
+	position: relative;
+	background: var(--color-print);
+	padding: 5% 5% 17%;
+	box-shadow: var(--travel-contact-shadow);
+
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+}
+
+.travel-paper-print::before,.travel-quote__note::before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: -.8125rem;
+	left: 32%;
+	width: 36%;
+	height: 1.65rem;
+	background: color-mix(in oklab, var(--pop) 25%, #decb9bbf);
+	rotate: -5deg;
+	pointer-events: none;
+}
+
+.travel-paper-print figcaption {
+	position: absolute;
+	bottom: 4%;
+	left: 5%;
+	right: 5%;
+	color: #4a3a50;
+	font: 400 clamp(1.125rem,2vw,2.125rem)/1 var(--font-script);
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+[data-cut] {
+	filter: var(--travel-cut-shadow);
+}
+
+.travel-cover-link {
+	color: inherit;
+	text-decoration: none;
+
+	&::after {
+		content: "";
+		position: absolute;
+		z-index: 2;
+		inset: 0;
+	}
+}
+
+:where(.travel-destination,.travel-post):has(.travel-cover-link:focus-visible) {
+	outline: 3px solid var(--color-focus);
+	outline-offset: 4px;
+}
+
+.travel-barcode {
+	display: inline-block;
+	block-size: 2.25rem;
+	inline-size: min(8rem,100%);
+	background: repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 3px,currentColor 3px 6px,transparent 6px 9px,currentColor 9px 10px,transparent 10px 15px);
+}
+
+/******** Ticker ********/
+.travel-ticker {
+	max-width: 100%;
+	overflow: clip;
+}
+
+.travel-ticker__track,.travel-ticker__group {
+	display: flex;
+	width: max-content;
+	align-items: center;
+}
+
+.travel-ticker__group {
+	flex-shrink: 0;
+	gap: clamp(1rem,3vw,3rem);
+	padding-inline: clamp(.5rem,1.5vw,1.5rem);
+}

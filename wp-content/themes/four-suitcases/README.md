@@ -12,7 +12,13 @@ Keep the Start Components companion plugin enabled for reusable blocks. Block id
 
 Client identity metadata does not rename database content, set the WordPress site title or provision pages. Display names can change; slugs/prefixes require migration. theme.json editor palette uses the light design values; runtime CSS maps semantic colors for system/light/dark modes. Client palette choices should use semantic roles (text/background/link) where color meaning must follow mode.
 
-Client-v2 tooling: run npm install once, retain the lockfile, then npm ci on clean checkouts. Builds minify CSS/JS, optimize trusted SVGs, and emit style-guide data. npm run dev serves a loopback-only reload stream on port 35729. Set START_DEV_ORIGIN to your development site URL when starting the watcher. Enable FOURSUITCASES_DEV_RELOAD in local wp-config.php only; production never needs Node. The style guide is available to editors at ?start_style_guide=1, outside menus and sitemaps.
+Run `npm install` once, retain the lockfile, then use `npm ci` on clean checkouts. Builds minify CSS and JavaScript, optimize trusted SVGs, and emit style-guide data. The style guide is available to editors at `?start_style_guide=1`, outside menus and sitemaps.
+
+Split styles with quoted imports such as `@import "./blocks/boarding-pass-stepper.css";`. Import paths are relative to the importing file and must stay within `assets/src/css`. The build inlines partials in import order.
+
+`assets/src/css/custom.css` is the index for the travel styles loaded after the theme defaults. Look in `css/blocks/` for layouts and variants, and `css/custom/` for shared travel styles, site chrome, and the Style Kit. Use native CSS nesting for related selectors.
+
+Start the site in Local, run `npm run dev` from the theme directory, and open `http://foursuitcasesandadream.local`. The watcher sends reload events on `127.0.0.1:35729` while Local serves the WordPress pages. The default site origin lives in `scripts/build.mjs`. Override it for another local domain or scheme with `START_DEV_ORIGIN=https://example.local npm run dev`. Enable `FOURSUITCASES_DEV_RELOAD` in local `wp-config.php` to load the browser client.
 
 ## Four Suitcases travel blocks
 

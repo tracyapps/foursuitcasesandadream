@@ -1,0 +1,46 @@
+/* Style kit */
+.travel-style-kit-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	gap: .75rem 1.2rem;
+	padding-block: 1.2rem;
+
+	label {
+		display: grid;
+		gap: .3rem;
+	}
+}
+
+.travel-style-kit-header {
+	padding-block: 3rem 1rem;
+}
+
+.travel-token-swatch {
+	display: inline-block;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid currentColor;
+	vertical-align: middle;
+}
+
+.travel-style-kit-example {
+	> .travel-style-kit-controls {
+		position: sticky;
+		z-index: 12;
+		top: calc(var(--travel-header-height) + var(--wp-admin--admin-bar--height,0px));
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	> section {
+		scroll-margin-top: 6rem;
+	}
+}
+
+@media (max-width: 50rem) {
+	.travel-style-kit-example > .travel-style-kit-controls {
+		position: relative;
+		top: auto;
+	}
+}

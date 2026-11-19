@@ -1,0 +1,208 @@
+/* Calls to action */
+.travel-cta-card {
+	position: relative;
+	max-width: 82.5rem;
+	margin-inline: auto;
+}
+
+.travel-v2-cta--pass {
+	.travel-cta-card {
+		display: grid;
+		grid-template-columns: minmax(0,68fr) minmax(0,32fr);
+		color: var(--ink);
+		background: var(--wash);
+		border-radius: var(--radius-ticket);
+		mask: radial-gradient(circle at 68% 0,transparent 13px,#000 13.5px) top/100% 51% no-repeat,radial-gradient(circle at 68% 100%,transparent 13px,#000 13.5px) bottom/100% 51% no-repeat;
+	}
+
+	.travel-inner {
+		filter: var(--travel-cut-shadow);
+	}
+
+	.travel-cta-action {
+		display: grid;
+		align-content: center;
+		justify-items: start;
+		gap: 1.35rem;
+		border-inline-start: 2px dashed color-mix(in oklab,currentColor 30%,transparent);
+	}
+
+	.travel-pass-button {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.travel-barcode {
+		width: min(9rem,100%);
+	}
+}
+
+.travel-cta-copy,.travel-cta-action {
+	padding: clamp(1.5rem,4.5vw,5rem);
+}
+
+.travel-cta-route {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .75rem clamp(1.1rem,4vw,3.2rem);
+	margin-block-start: 1.65rem;
+	font: 600 clamp(1.55rem,3vw,4rem)/1 var(--font-serif);
+
+	> span:nth-child(2) {
+		font-size: .7em;
+		color: color-mix(in oklab,var(--pop) 65%,currentColor);
+	}
+
+	> span:last-child {
+		overflow-wrap: anywhere;
+		min-width: 0;
+	}
+}
+
+.travel-v2-cta--poster {
+	background: var(--ink);
+	color: var(--wash);
+	--pass-bg: var(--wash);
+	--pass-text: var(--ink);
+
+	.travel-cta-card {
+		width: min(100%,51rem);
+		text-align: center;
+	}
+
+	.travel-cta-copy {
+		padding-block: 0;
+	}
+
+	.travel-lead {
+		margin-inline: auto;
+	}
+
+	.travel-cta-action {
+		padding-block-end: 0;
+	}
+}
+
+.travel-poster-ticker {
+	position: absolute;
+	inset: 30% 0 auto;
+	opacity: .14;
+	pointer-events: none;
+
+	span {
+		font: italic 650 clamp(5rem,17vw,15rem)/1 var(--font-serif);
+		-webkit-text-stroke: 2px currentColor;
+		color: transparent;
+		-webkit-text-stroke-color: var(--wash);
+	}
+}
+
+.travel-poster-art {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	opacity: .88;
+
+	img {
+		position: absolute;
+		width: clamp(4rem,14vw,14rem);
+	}
+
+	img:nth-child(1) {
+		left: 5%;
+		top: 10%;
+		rotate: -14deg;
+	}
+
+	img:nth-child(2) {
+		right: 4%;
+		top: 4%;
+		rotate: 14deg;
+	}
+
+	img:nth-child(3) {
+		left: 9%;
+		bottom: 2%;
+		rotate: 18deg;
+	}
+
+	img:nth-child(4) {
+		right: 7%;
+		bottom: 3%;
+		rotate: -8deg;
+	}
+
+	img:nth-child(5) {
+		left: -5%;
+		bottom: 35%;
+		rotate: -17deg;
+	}
+}
+
+.travel-v2-cta--banner {
+	.travel-cta-card {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0 1rem;
+		border-radius: 1.75rem;
+		color: var(--ink);
+		background: var(--wash);
+	}
+
+	.travel-cta-copy {
+		flex: 1 1 23rem;
+	}
+
+	.travel-cta-action {
+		flex: 0 1 auto;
+	}
+}
+
+.travel-banner-art {
+	position: absolute;
+	right: 8%;
+	top: -2.4rem;
+	width: clamp(5rem,16vw,16rem);
+	rotate: -11deg;
+	pointer-events: none;
+}
+
+@media (max-width: 51.25rem) {
+	.travel-v2-cta--pass {
+		.travel-cta-card {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.travel-cta-card {
+			mask: radial-gradient(circle at 0 70%,transparent 11px,#000 11.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 70%,transparent 11px,#000 11.5px) right/51% 100% no-repeat;
+		}
+
+		.travel-cta-action {
+			border-inline-start: 0;
+			border-block-start: 2px dashed color-mix(in oklab,currentColor 30%,transparent);
+		}
+	}
+
+	.travel-poster-art {
+		opacity: .36;
+	}
+}
+
+.travel-destination-pause {
+	align-self: end;
+	min-width: 2.75rem;
+	min-height: 2.75rem;
+	border: 1px solid currentColor;
+	border-radius: 50%;
+	color: inherit;
+	background: transparent;
+	font: 700 .85rem/1 var(--font-sans);
+	cursor: pointer;
+
+	&[hidden] {
+		display: none;
+	}
+}

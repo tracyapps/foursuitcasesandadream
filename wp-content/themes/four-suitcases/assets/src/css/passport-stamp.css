@@ -1,35 +1,68 @@
 .travel-stamp {
-  box-sizing:border-box;
-  display:grid;
-  align-content:center;
-  grid-template-columns:minmax(0,1fr);
-  justify-items:center;
-  gap:.18rem;
-  width:9rem;
-  min-height:5.5rem;
-  padding:.38rem .65rem;
-  border:4px double currentColor;
-  color:var(--pop, var(--color-plum-pop));
-  font:700 .59rem/1.14 var(--font-sans);
-  letter-spacing:.07em;
-  text-transform:uppercase;
-  text-align:center;
-  overflow-wrap:anywhere;
-}
-.travel-stamp > * { max-width:100%; }
-.travel-stamp strong { font:800 1.08rem/1 var(--font-serif); letter-spacing:0; }
-.travel-stamp--round { width:8rem; min-height:8rem; padding-inline:.92rem; border-radius:50%; }
-.travel-stamp--rectangle { border-radius:.35rem; }
-.travel-stamp--oval { padding-inline:1rem; border-radius:50%; }
-[data-passport-preview] {
-  display:grid;
-  min-width:9.5rem;
-  min-height:9rem;
-  justify-items:center;
-  align-items:center;
-  background:var(--color-bg);
-}
-[data-passport-preview] p { margin:0; padding:.45rem; color:var(--color-muted); }
+	box-sizing: border-box;
+	display: grid;
+	align-content: center;
+	grid-template-columns: minmax(0,1fr);
+	justify-items: center;
+	gap: .18rem;
+	width: 9rem;
+	min-height: 5.5rem;
+	padding: .38rem .65rem;
+	border: 4px double currentColor;
+	color: var(--pop, var(--color-plum-pop));
+	font: 700 .59rem/1.14 var(--font-sans);
+	letter-spacing: .07em;
+	text-transform: uppercase;
+	text-align: center;
+	overflow-wrap: anywhere;
 
-.acf-field[data-name='travel_passport_stamps'] > .acf-input { overflow-x:auto; }
-.acf-field[data-name='travel_passport_stamps'] .acf-row-handle.remove .acf-icon { display:block; }
+	> * {
+		max-width: 100%;
+	}
+
+	strong {
+		font: 800 1.08rem/1 var(--font-serif);
+		letter-spacing: 0;
+	}
+}
+
+.travel-stamp--round {
+	width: 8rem;
+	min-height: 8rem;
+	padding-inline: .92rem;
+	border-radius: 50%;
+}
+
+.travel-stamp--rectangle {
+	border-radius: .35rem;
+}
+
+.travel-stamp--oval {
+	padding-inline: 1rem;
+	border-radius: 50%;
+}
+
+[data-passport-preview] {
+	display: grid;
+	min-width: 9.5rem;
+	min-height: 9rem;
+	justify-items: center;
+	align-items: center;
+	background: var(--color-bg);
+}
+
+[data-passport-preview] p {
+	margin: 0;
+	padding: .45rem;
+	color: var(--color-muted);
+}
+
+.acf-field {
+	&[data-name='travel_passport_stamps'] > .acf-input {
+		overflow-x: auto;
+	}
+
+	&[data-name='travel_passport_stamps'] .acf-row-handle.remove .acf-icon {
+		display: block;
+	}
+}

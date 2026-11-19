@@ -2,20 +2,41 @@ import {createRequire} from 'node:module';
 const tools=createRequire(process.env.START_BUILD_TOOLS?process.env.START_BUILD_TOOLS+'/package.json':import.meta.url);
 const {build: bundle, transform}=tools('esbuild'),{optimize}=tools('svgo');
 import {createServer} from 'node:http';
-import { readFile, writeFile, mkdir, rm, rename, readdir, open, watch } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rm, rename, readdir, open, realpath, watch } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { compileTokens } from './token-compiler.mjs';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const file = relative => path.join(root, relative);
 const json = value => JSON.stringify(value, null, 2) + '\n';
+const cssRoot = await realpath(file('assets/src/css'));
+function isLocalCss(filename) {
+  const relative = path.relative(cssRoot, filename);
+  return path.extname(filename) === '.css' && !relative.startsWith('..' + path.sep) && !path.isAbsolute(relative);
+}
 async function css(relative, chain = []) {
-  if (chain.includes(relative)) throw new Error('Cyclic local CSS import');
-  let source = await readFile(file('assets/src/css/' + relative), 'utf8');
-  const imports = [...source.matchAll(/@import\s+"\.\/([a-z-]+\.css)"\s*;/g)];
-  for (const item of imports) source = source.replace(item[0], await css(item[1], [...chain, relative]));
-  if (/@import\s/.test(source)) throw new Error('Build supports local CSS partial imports only');
-  return source;
+  const filename = await realpath(path.resolve(cssRoot, relative));
+  if (!isLocalCss(filename)) throw new Error(`CSS partial is outside assets/src/css: ${relative}`);
+  if (chain.includes(filename)) throw new Error(`Cyclic CSS import: ${[...chain, filename].map(item => path.relative(cssRoot, item)).join(' → ')}`);
+
+  const source = await readFile(filename, 'utf8');
+  // Skip comments and quoted strings so examples and content values are left alone.
+  const tokens = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|(@import\b[^;]*;?)/gi;
+  let result = '';
+  let cursor = 0;
+  for (const token of source.matchAll(tokens)) {
+    const rule = token[1];
+    if (!rule) continue;
+    const specifier = rule.match(/^@import\s+(["'])([^"'\r\n]+)\1\s*;$/i)?.[2];
+    const target = specifier && path.resolve(path.dirname(filename), specifier);
+    if (!target || /[:?#\\]/.test(specifier) || path.isAbsolute(specifier) || !isLocalCss(target)) {
+      throw new Error(`Invalid CSS import in ${relative}: ${rule.trim()}. Use a quoted relative .css path within assets/src/css.`);
+    }
+    result += source.slice(cursor, token.index);
+    result += await css(path.relative(cssRoot, target), [...chain, filename]);
+    cursor = token.index + rule.length;
+  }
+  return result + source.slice(cursor);
 }
 async function sprite() {
   const symbols = [];
@@ -36,7 +57,7 @@ async function build() {
   try {
     const compiled = compileTokens(JSON.parse(await readFile(file('design.tokens.json'), 'utf8')));
     const scripts = await bundle({
-      entryPoints: ['main', 'passport-preview', 'editor-preview-links'].map(name => file('assets/src/js/' + name + '.js')),
+      entryPoints: ['main', 'passport-preview', 'editor-preview-links', 'editor-block-width'].map(name => file('assets/src/js/' + name + '.js')),
       outdir: file('assets/dist/js'), bundle: true, write: false,
       format: 'iife', minify: true, target: 'es2022',
     });
@@ -48,7 +69,7 @@ async function build() {
       'data/style-guide.json':json({version:1,designId:compiled.document.id,revision:compiled.document.revision,tokens:compiled.document.tokens})
     };
     for (const name of Object.keys(output)) {
-      if(name.endsWith('.css') && name!=='css/tokens.css') output[name]=(await transform(output[name],{loader:'css',minify:true,target:'es2022'})).code;
+      if(name.endsWith('.css') && name!=='css/tokens.css') output[name]=(await transform(output[name],{loader:'css',minify:true,target:'es2022',supported:{nesting:false}})).code;
       if(name==='js/editor.js') output[name]=(await transform(output[name],{loader:'js',minify:true,target:'es2022'})).code;
     }
     await rm(file('assets/.dist-next'), {recursive:true,force:true});
@@ -68,7 +89,7 @@ async function build() {
 }
 await build();
 if (process.argv.includes('--watch')) {
-  const origin=new URL(process.env.START_DEV_ORIGIN||'http://start.local').origin;
+  const origin=new URL(process.env.START_DEV_ORIGIN||'http://foursuitcasesandadream.local').origin;
   const port=Number(process.env.START_DEV_PORT||35729);if(!Number.isInteger(port)||port<1024||port>65535)throw new Error('Invalid reload port');
   const clients=new Set();
   const reload=()=>{for(const response of clients)response.write('data: reload\n\n');};
@@ -79,7 +100,7 @@ if (process.argv.includes('--watch')) {
     if(req.url!=='/events'){res.writeHead(404).end();return;}
     res.writeHead(200,{'Content-Type':'text/event-stream','Connection':'keep-alive'});res.write(': connected\n\n');clients.add(res);req.on('close',()=>clients.delete(res));
   });
-  server.listen(port,'127.0.0.1',()=>console.log('Reload server: http://127.0.0.1:'+port+'; origin '+origin));
+  server.listen(port,'127.0.0.1',()=>console.log(`Open ${origin} for the site. Live reload listens on http://127.0.0.1:${port}.`));
   const close=()=>{for(const response of clients)response.end();server.close();process.exit();};process.on('SIGTERM',close);process.on('SIGINT',close);
 
   let running = false, dirty = false;
@@ -92,7 +113,7 @@ if (process.argv.includes('--watch')) {
   };
   // Component assets are built by their own watcher; reload only completed output/PHP/JSON changes.
   void (async()=>{try{for await(const event of watch(path.resolve(root,'../../plugins/start-components'),{recursive:true})){if(event.filename?.startsWith('dist/')||event.filename?.endsWith('.php')||event.filename?.startsWith('acf-json/'))reload();}}catch(e){if(e.code!=='ENOENT')console.error('Companion reload watch unavailable');}})();
-  console.log('Watching design.tokens.json and assets/src. Enable START_DEV_RELOAD on a local WordPress environment for automatic reload.');
+  console.log('Watching design.tokens.json and assets/src. Enable FOURSUITCASES_DEV_RELOAD in local wp-config.php for automatic reload.');
   for await (const event of watch(root,{recursive:true})) {
     if(event.filename?.endsWith('.php')||event.filename?.startsWith('acf-json/')){reload();continue;}
     if (event.filename === 'design.tokens.json' || event.filename?.startsWith('assets/src/')) void rebuild();

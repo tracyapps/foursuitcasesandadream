@@ -1,0 +1,25 @@
+/* Hero word accents and suitcase placement */
+.travel-hero-word,.travel-v2-hero h1 .travel-script {
+	display: inline-block;
+}
+
+.travel-v2-hero--collage .travel-unpack {
+	bottom: -13%;
+	width: 41%;
+}
+
+@media (max-width: 48rem) {
+	.travel-v2-hero--collage {
+		padding-block-end: clamp(4rem,15vw,7rem);
+	}
+
+	.travel-hero-print--second {
+		top: 28%;
+		width: 40%;
+	}
+
+	.travel-v2-hero--collage .travel-unpack {
+		bottom: -19%;
+		width: 37%;
+	}
+}

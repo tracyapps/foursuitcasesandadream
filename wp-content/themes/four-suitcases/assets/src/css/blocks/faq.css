@@ -1,0 +1,118 @@
+/* Frequently asked questions */
+.travel-faq-grid {
+	max-width: 106rem;
+}
+
+.travel-v2-faq--split {
+	.travel-faq-grid {
+		display: grid;
+		grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr);
+		align-items: start;
+		gap: clamp(2rem,6vw,7rem);
+	}
+
+	.travel-section-intro[data-travel-protect] {
+		position: sticky;
+		top: calc(var(--travel-header-height) + var(--wp-admin--admin-bar--height,0px) + 1.5rem);
+	}
+}
+
+.travel-faq-object {
+	display: block;
+	width: clamp(7rem,17vw,17rem);
+	margin-block-start: 1.5rem;
+}
+
+.travel-v2-faq--accordion .travel-faq-grid {
+	max-width: 61rem;
+}
+
+.travel-faq-list {
+	details {
+		padding: 0;
+		border-block-end: 1px solid color-mix(in oklab,currentColor 28%,transparent);
+	}
+
+	summary {
+		list-style: none;
+		display: grid;
+		grid-template-columns: auto minmax(0,1fr) 2.75rem;
+		align-items: center;
+		gap: clamp(.5rem,1.8vw,1.25rem);
+		min-height: 4.55rem;
+		padding: .55rem .15rem;
+		font: 600 clamp(1.15rem,2vw,1.85rem)/1.16 var(--font-serif);
+	}
+}
+
+.travel-size--cozy .travel-faq-list summary {
+	min-height: 3.7rem;
+	font-size: clamp(1.05rem,1.6vw,1.55rem);
+}
+
+.travel-faq-list summary::-webkit-details-marker {
+	display: none;
+}
+
+.travel-faq-number {
+	font: 700 .76rem/1 var(--font-sans);
+	color: color-mix(in oklab,var(--pop) 35%,currentColor);
+}
+
+.travel-faq-toggle {
+	display: grid;
+	place-items: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border-radius: 50%;
+	border: 1px solid currentColor;
+	font: 400 1.7rem/1 var(--font-sans);
+	transition: rotate .35s;
+}
+
+.travel-faq-list details[open] .travel-faq-toggle {
+	background: var(--ink);
+	color: var(--wash);
+	rotate: 45deg;
+}
+
+.travel-faq-answer {
+	padding: .5rem 0 1.4rem 2.5rem;
+
+	> * + * {
+		margin-block-start: 1rem !important;
+	}
+}
+
+@supports selector(::details-content) {
+	.travel-faq-list {
+		details::details-content {
+			block-size: 0;
+			overflow: clip;
+			interpolate-size: allow-keywords;
+			transition: block-size .5s,content-visibility .5s allow-discrete;
+		}
+
+		details[open]::details-content {
+			block-size: auto;
+		}
+	}
+}
+
+@media (max-width: 51.25rem) {
+	.travel-v2-faq--split {
+		.travel-faq-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.travel-section-intro[data-travel-protect] {
+			position: relative;
+			top: auto;
+			margin: 0;
+		}
+	}
+
+	.travel-faq-object {
+		display: none;
+	}
+}

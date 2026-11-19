@@ -1,0 +1,280 @@
+/* might not need this. delete after test.
+.acf-block-hero {
+	pa!**!dding-block: var(--space-section);
+	background: var(--hero-bg, var(--color-surface));
+}
+
+.acf-block-hero__inner {
+	width: var(--layout-content);
+	margin-inline: auto;
+	display: grid;
+	grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr);
+	gap: var(--space-lg);
+	align-items: center;
+}
+
+.acf-block-hero__eyebrow {
+	color: var(--color-accent-strong);
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.acf-block-hero__title {
+	max-width: 14ch;
+	font-size: clamp(2.25rem, 6vw, 4.75rem);
+}
+
+.acf-block-hero__media img {
+	width: 100%;
+	border-radius: var(--radius-md);
+}
+
+@media (max-width: 48rem) {
+	.acf-block-hero__inner {
+		grid-template-columns: 1fr;
+	}
+}*/
+/* Heroes */
+.travel-v2-hero {
+	color: var(--ink);
+	padding-block: clamp(3rem, 7vw, 8.5rem);
+	background: var(--wash);
+}
+
+/******** Hero variants ********/
+.travel-v2-hero--collage {
+	background: radial-gradient(120% 90% at 85% 20%, color-mix(in oklab, var(--pop) 22%, var(--wash)), var(--wash) 60%);
+}
+
+.travel-v2-hero--split {
+	background: linear-gradient(150deg, var(--wash) 30%, var(--color-bg) 92%);
+}
+
+.travel-v2-hero--bleed {
+	color: #fffaf0;
+	background: var(--ink);
+	padding-block: 0;
+	--travel-accent: #ffd166;
+	--pass-bg: #ffd166;
+	--pass-text: #2b1d07;
+}
+
+.travel-hero-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 32.5rem), 1fr));
+	gap: clamp(2rem, 4vw, 4rem);
+	align-items: center;
+}
+
+.travel-hero-size--tall:not(.travel-v2-hero--bleed) .travel-hero-grid {
+	min-height: min(72svh, 59rem);
+}
+
+.travel-hero-size--compact {
+	padding-block: clamp(2.5rem, 5vw, 5rem);
+
+	h1 {
+		font-size: clamp(2.75rem, 5vw, 6.5rem);
+	}
+}
+
+.travel-v2-hero--bleed {
+	.travel-hero-grid {
+		min-height: 100svh;
+		align-items: end;
+		padding-block: clamp(3rem, 9vw, 10rem);
+	}
+
+	&.travel-hero-size--compact .travel-hero-grid {
+		min-height: 72svh;
+	}
+
+	&.travel-hero-size--tall h1 {
+		font-size: clamp(3.5rem, 8.6vw, 11.875rem);
+	}
+}
+
+.travel-hero-copy {
+	min-width: 0;
+
+	.travel-lead {
+		max-width: 39ch;
+	}
+
+	.travel-eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: .65rem;
+		border: 1.5px solid currentColor;
+		border-radius: 999px;
+		padding: .55rem .9rem;
+		color: inherit;
+	}
+
+	.travel-eyebrow::before {
+		content: "";
+		width: .5rem;
+		height: .5rem;
+		border-radius: 50%;
+		background: var(--pop);
+	}
+}
+
+.travel-hero-rose {
+	position: absolute;
+	z-index: -2;
+	width: clamp(17rem, 59vw, 68rem);
+	top: -17%;
+	right: -9%;
+	opacity: .09;
+	pointer-events: none;
+}
+
+.travel-hero-stage {
+	position: relative;
+	width: 100%;
+	max-width: 61.25rem;
+	aspect-ratio: 1/.95;
+}
+
+.travel-v2-hero--collage .travel-hero-print {
+	position: absolute;
+}
+
+.travel-hero-print--first {
+	z-index: 1;
+	left: 12%;
+	top: 4%;
+	width: 58%;
+}
+
+.travel-hero-print--second {
+	right: 0;
+	top: 9%;
+	width: 38%;
+
+	figcaption {
+		left: 24%;
+		right: 3%;
+		font-size: clamp(.9rem, 1.55vw, 1.75rem);
+	}
+}
+
+.travel-hero-print--first img {
+	aspect-ratio: 1.08;
+	object-fit: cover;
+}
+
+.travel-hero-print--second img, .travel-v2-hero--split .travel-hero-print img {
+	aspect-ratio: 4/5;
+	object-fit: cover;
+}
+
+.travel-hero-cut {
+	position: absolute;
+	z-index: 2;
+	pointer-events: none;
+}
+
+.travel-hero-cut--first {
+	left: -4%;
+	top: 8%;
+	width: 28%;
+}
+
+.travel-hero-cut--second {
+	left: 26%;
+	bottom: -6%;
+	width: 27%;
+}
+
+.travel-unpack {
+	position: absolute;
+	z-index: 3;
+	right: -4%;
+	bottom: -9%;
+	width: 44%;
+}
+
+.travel-v2-hero--split {
+	.travel-hero-print--first {
+		width: min(76%, 31rem);
+		margin: auto;
+	}
+
+	.travel-hero-stage {
+		aspect-ratio: auto;
+	}
+
+	.travel-hero-cut--second {
+		left: 0;
+		bottom: 0;
+	}
+}
+
+.travel-v2-hero--bleed {
+	.travel-hero-stage {
+		min-height: clamp(6rem, 14vw, 14rem);
+		aspect-ratio: auto;
+	}
+
+	.travel-unpack {
+		width: clamp(8rem, 28vw, 32rem);
+		bottom: clamp(-10rem, -8vw, -4.4rem);
+	}
+}
+
+.travel-hero-photo {
+	position: absolute;
+	z-index: -2;
+	inset: 0;
+	overflow: clip;
+
+	> div {
+		position: absolute;
+		inset: -14% 0;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(0deg, #160c1cdb, #160c1c59 55%, #160c1c1a), linear-gradient(90deg, #160c1ca8, transparent 82%);
+	}
+}
+
+.travel-v2-hero--bleed .travel-hero-grid {
+	grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+}
+
+@media (max-width: 72rem) {
+	.travel-v2-hero:not(.travel-v2-hero--bleed) .travel-hero-stage {
+		max-width: min(100%, 40rem);
+		margin-inline: auto;
+	}
+}
+
+@media (max-width: 48rem) {
+	.travel-v2-hero--bleed {
+		.travel-hero-grid {
+			grid-template-columns: minmax(0, 1fr);
+			align-content: end;
+			gap: 0;
+			padding-block-end: 3rem;
+		}
+
+		.travel-unpack {
+			bottom: 0;
+		}
+	}
+
+	.travel-v2-hero h1 {
+		font-size: clamp(2.75rem, 10vw, 4.75rem);
+	}
+}

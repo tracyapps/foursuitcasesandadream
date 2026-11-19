@@ -28,3 +28,45 @@ add_action( 'init', function () {
 
 
 require_once __DIR__ . '/travel.php';
+
+function foursuitcases_has_block_width_control( $name ) {
+	return is_string( $name ) && ( str_starts_with( $name, 'acf/travel-' )
+		|| in_array( $name, array( 'acf/hero', 'start/contact-callout', 'start/design-element', 'start/disclosure' ), true ) );
+}
+
+add_filter( 'register_block_type_args', function ( $args, $name ) {
+	if ( ! foursuitcases_has_block_width_control( $name ) ) {
+		return $args;
+	}
+	// Keep the WordPress alignment attribute and use one toolbar that also offers Contained.
+	$args['supports']['align'] = false;
+	$args['attributes']['align'] = array(
+		'type' => 'string',
+		'enum' => array( '', 'none', 'contained', 'wide', 'full' ),
+	);
+	return $args;
+}, 10, 2 );
+
+add_filter( 'render_block', function ( $content, $block ) {
+	$width = $block['attrs']['align'] ?? '';
+	if ( ! in_array( $width, array( 'none', 'contained', 'wide', 'full' ), true )
+		|| ! foursuitcases_has_block_width_control( $block['blockName'] ) ) {
+		return $content;
+	}
+	$markup = new WP_HTML_Tag_Processor( $content );
+	if ( $markup->next_tag() ) {
+		$markup->set_attribute( 'data-fsa-width', $width );
+	}
+	return $markup->get_updated_html();
+}, 10, 2 );
+
+add_action( 'enqueue_block_editor_assets', function () {
+	$file = 'assets/dist/js/editor-block-width.js';
+	wp_enqueue_script(
+		'four-suitcases-editor-block-width',
+		FOURSUITCASES_URI . $file,
+		array( 'wp-block-editor', 'wp-components', 'wp-element', 'wp-hooks', 'wp-i18n' ),
+		foursuitcases_asset_version( $file ),
+		true
+	);
+} );

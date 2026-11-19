@@ -1,0 +1,137 @@
+/* Travel section width, layout and typography */
+.travel-section {
+	position: relative;
+	isolation: isolate;
+	padding-block: var(--space-xxl);
+	color: var(--color-text);
+	background: var(--color-bg);
+}
+
+.entry-content {
+	> .travel-section {
+		margin-block-start: 0;
+	}
+
+	> .travel-section:not([data-fsa-width]), > [data-fsa-width="full"] {
+		width: 100vw;
+		margin-inline: calc(50% - 50vw);
+	}
+
+	> [data-fsa-width="wide"] {
+		--block-wide-width: min(100vw - 2rem, var(--wp--style--global--wide-size, 88rem));
+		width: var(--block-wide-width);
+		margin-inline: calc((100% - var(--block-wide-width)) / 2);
+	}
+}
+
+[data-fsa-width="wide"] {
+	width: var(--layout-wide);
+	margin-inline: auto;
+}
+
+[data-fsa-width="full"] {
+	width: 100%;
+	margin-inline: auto;
+}
+
+[data-fsa-width="none"] {
+	width: min(100%,var(--wp--style--global--content-size,72rem));
+	margin-inline: auto;
+}
+
+[data-fsa-width="contained"] {
+	--travel-gutter: clamp(.75rem,2.5vw,2rem);
+	width: min(86vw,var(--layout-narrow));
+	margin-inline: auto;
+}
+
+.travel-hero[data-fsa-width]:not([data-fsa-width="full"]) {
+	padding-inline: var(--travel-gutter);
+}
+
+.editor-styles-wrapper .travel-section {
+	width: 100%;
+	margin-inline: 0;
+}
+
+.travel-background--wash {
+	color: var(--ink);
+	background: var(--wash);
+}
+
+.travel-inner {
+	width: min(100%,var(--layout-full));
+	margin-inline: auto;
+	padding-inline: var(--travel-gutter);
+}
+
+.travel-section-intro {
+	position: relative;
+	margin-block-end: clamp(2.25rem,5vw,5rem);
+}
+
+.travel-section :is(h1,h2,h3,p,figure,blockquote), .travel-site-footer :is(h2,h3,p) {
+	margin: 0;
+}
+
+.travel-section :is(h1,h2,h3), .travel-site-footer :is(h2,h3) {
+	color: inherit;
+	font-weight: 600;
+	overflow-wrap: anywhere;
+}
+
+.travel-section h1 {
+	font-size: clamp(3.375rem,7vw,9.75rem);
+	line-height: .9;
+	letter-spacing: -.045em;
+}
+
+.travel-heading {
+	font-size: clamp(2.625rem,5.4vw,6.75rem);
+	line-height: .92;
+	letter-spacing: -.04em;
+}
+
+.travel-section h3 {
+	font-size: clamp(1.625rem,2.2vw,2.5rem);
+	line-height: 1.02;
+	letter-spacing: -.025em;
+}
+
+.travel-script {
+	font: 400 1.15em/.82 var(--font-script);
+	letter-spacing: 0;
+	color: var(--travel-accent, color-mix(in oklab, var(--pop) 50%, currentColor));
+}
+
+.travel-eyebrow,.travel-label {
+	font: 700 .75rem/1.45 var(--font-sans);
+	letter-spacing: .23em;
+	text-transform: uppercase;
+}
+
+.travel-eyebrow {
+	color: var(--travel-accent, color-mix(in oklab, var(--pop) 35%, currentColor));
+}
+
+.travel-section {
+	.travel-eyebrow:has(+ :is(h1,h2)) {
+		margin-block-end: 1rem;
+	}
+
+	.travel-lead {
+		max-width: 58ch;
+		margin-block-start: 1.35rem;
+		font-size: clamp(1.0625rem,1.3vw,1.4375rem);
+		line-height: 1.58;
+	}
+
+	& {
+		font-size: clamp(1.0625rem,1.2vw,1.3125rem);
+		line-height: 1.55;
+	}
+}
+
+.travel-size--cozy {
+	padding-block: clamp(2.75rem,6vw,6rem);
+}
