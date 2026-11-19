@@ -1,0 +1,1 @@
+window.wp?.domReady?.(()=>{const o=window.wp?.blocks?.unregisterBlockStyle;o&&[["core/image","rounded"],["core/button","outline"],["core/separator","dots"],["core/social-links","logos-only"],["core/social-links","pill-shape"]].forEach(([e,r])=>o(e,r))});

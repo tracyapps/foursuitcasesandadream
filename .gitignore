@@ -1,0 +1,39 @@
+# BEGIN START MANAGED
+# WordPress-root allowlist; custom runtime builds are intentionally tracked.
+/*
+!.gitignore
+!start.project.json
+!AGENTS.md
+!STYLE.md
+!README.md
+!CHANGELOG.md
+!wp-content/
+/wp-content/*
+!/wp-content/themes/
+!/wp-content/plugins/
+/wp-content/themes/*
+/wp-content/plugins/*
+!wp-content/themes/four-suitcases/
+!wp-content/plugins/start-components/
+# Keep credentials, dependencies, backups and local state out of tracked sources.
+**/node_modules/
+**/bower_components/
+**/vendor/
+**/.git/
+**/.env
+**/.env.*
+**/.npmrc
+**/.DS_Store
+**/wp-config.php
+**/auth.json
+**/credentials.json
+**/*.pem
+**/*.key
+**/*.log
+**/*.sql
+**/*.sqlite
+**/*.zip
+**/*.tar
+**/*.gz
+**/.start/
+# END START MANAGED

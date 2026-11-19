@@ -1,0 +1,296 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": false,
+    "color": {
+      "custom": false,
+      "customDuotone": false,
+      "customGradient": false,
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "defaultDuotone": false,
+      "palette": [
+        {
+          "slug": "accent",
+          "name": "accent",
+          "color": "#572e66"
+        },
+        {
+          "slug": "accent-strong",
+          "name": "accent strong",
+          "color": "#c4492d"
+        },
+        {
+          "slug": "apricot-ink",
+          "name": "apricot ink",
+          "color": "#63361f"
+        },
+        {
+          "slug": "apricot-pop",
+          "name": "apricot pop",
+          "color": "#dc7433"
+        },
+        {
+          "slug": "apricot-surface",
+          "name": "apricot surface",
+          "color": "#ffe4cc"
+        },
+        {
+          "slug": "bg",
+          "name": "bg",
+          "color": "#fbf7ef"
+        },
+        {
+          "slug": "border",
+          "name": "border",
+          "color": "#e4d9ca"
+        },
+        {
+          "slug": "coral-ink",
+          "name": "coral ink",
+          "color": "#6e1f18"
+        },
+        {
+          "slug": "coral-pop",
+          "name": "coral pop",
+          "color": "#e04e3a"
+        },
+        {
+          "slug": "coral-surface",
+          "name": "coral surface",
+          "color": "#ffdcd5"
+        },
+        {
+          "slug": "focus",
+          "name": "focus",
+          "color": "#c4492d"
+        },
+        {
+          "slug": "gold",
+          "name": "gold",
+          "color": "#a87a22"
+        },
+        {
+          "slug": "ink",
+          "name": "ink",
+          "color": "#302438"
+        },
+        {
+          "slug": "link",
+          "name": "link",
+          "color": "#572e66"
+        },
+        {
+          "slug": "mint-ink",
+          "name": "mint ink",
+          "color": "#154a2f"
+        },
+        {
+          "slug": "mint-pop",
+          "name": "mint pop",
+          "color": "#279a66"
+        },
+        {
+          "slug": "mint-surface",
+          "name": "mint surface",
+          "color": "#d4f2e1"
+        },
+        {
+          "slug": "muted",
+          "name": "muted",
+          "color": "#675d6e"
+        },
+        {
+          "slug": "night-ink",
+          "name": "night ink",
+          "color": "#fbf7ef"
+        },
+        {
+          "slug": "night-pop",
+          "name": "night pop",
+          "color": "#e0bc66"
+        },
+        {
+          "slug": "night-surface",
+          "name": "night surface",
+          "color": "#302438"
+        },
+        {
+          "slug": "paper",
+          "name": "paper",
+          "color": "#fbf7ef"
+        },
+        {
+          "slug": "plum-ink",
+          "name": "plum ink",
+          "color": "#482451"
+        },
+        {
+          "slug": "plum-pop",
+          "name": "plum pop",
+          "color": "#8a3f9e"
+        },
+        {
+          "slug": "plum-surface",
+          "name": "plum surface",
+          "color": "#eee1f1"
+        },
+        {
+          "slug": "print",
+          "name": "print",
+          "color": "#fffdf8"
+        },
+        {
+          "slug": "sand-ink",
+          "name": "sand ink",
+          "color": "#524120"
+        },
+        {
+          "slug": "sand-pop",
+          "name": "sand pop",
+          "color": "#b0832a"
+        },
+        {
+          "slug": "sand-surface",
+          "name": "sand surface",
+          "color": "#f1e7cb"
+        },
+        {
+          "slug": "sea-ink",
+          "name": "sea ink",
+          "color": "#194e4a"
+        },
+        {
+          "slug": "sea-pop",
+          "name": "sea pop",
+          "color": "#1f8a80"
+        },
+        {
+          "slug": "sea-surface",
+          "name": "sea surface",
+          "color": "#d9eeea"
+        },
+        {
+          "slug": "sky-ink",
+          "name": "sky ink",
+          "color": "#123f63"
+        },
+        {
+          "slug": "sky-pop",
+          "name": "sky pop",
+          "color": "#2a7fc9"
+        },
+        {
+          "slug": "sky-surface",
+          "name": "sky surface",
+          "color": "#d6eafa"
+        },
+        {
+          "slug": "sun-ink",
+          "name": "sun ink",
+          "color": "#544000"
+        },
+        {
+          "slug": "sun-pop",
+          "name": "sun pop",
+          "color": "#e2a90f"
+        },
+        {
+          "slug": "sun-surface",
+          "name": "sun surface",
+          "color": "#fff0b0"
+        },
+        {
+          "slug": "surface",
+          "name": "surface",
+          "color": "#ffffff"
+        },
+        {
+          "slug": "text",
+          "name": "text",
+          "color": "#302438"
+        }
+      ]
+    },
+    "layout": {
+      "contentSize": "72rem",
+      "wideSize": "88rem"
+    },
+    "spacing": {
+      "customSpacingSize": false,
+      "defaultSpacingSizes": false,
+      "spacingScale": {
+        "steps": 0
+      },
+      "spacingSizes": [
+        {
+          "slug": "xs",
+          "name": "XS",
+          "size": "0.5rem"
+        },
+        {
+          "slug": "sm",
+          "name": "SM",
+          "size": "1rem"
+        },
+        {
+          "slug": "md",
+          "name": "MD",
+          "size": "1.5rem"
+        },
+        {
+          "slug": "lg",
+          "name": "LG",
+          "size": "2.5rem"
+        },
+        {
+          "slug": "xl",
+          "name": "XL",
+          "size": "4rem"
+        }
+      ]
+    },
+    "typography": {
+      "customFontSize": false,
+      "defaultFontSizes": false,
+      "fontFamilies": [
+        {
+          "slug": "sans",
+          "name": "sans",
+          "fontFamily": "Inter Tight, system-ui, sans-serif"
+        },
+        {
+          "slug": "serif",
+          "name": "serif",
+          "fontFamily": "Petrona, Georgia, serif"
+        }
+      ],
+      "fontSizes": [
+        {
+          "slug": "base",
+          "name": "Base",
+          "size": "1rem"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--color-bg)",
+      "text": "var(--color-text)"
+    },
+    "typography": {
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "1rem",
+      "lineHeight": "1.6"
+    },
+    "elements": {
+      "link": {
+        "color": {
+          "text": "var(--color-link)"
+        }
+      }
+    }
+  }
+}

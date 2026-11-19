@@ -1,0 +1,12 @@
+Bundled license information:
+
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.5Q3C7XRF.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.2W5ICYYR.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.4RAXYMTU.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.T2PA53U2.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.QNBIIK3Q.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.7AI42XEE.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.IPPA3FJY.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.U64SWO3V.js:
+@web.awesome.me/webawesome-pro/dist/components/date-picker/date-picker.js:
+  /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */

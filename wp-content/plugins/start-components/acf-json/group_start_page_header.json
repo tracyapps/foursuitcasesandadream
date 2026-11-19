@@ -1,0 +1,96 @@
+{
+  "key": "group_start_page_header",
+  "title": "Page Header",
+  "fields": [
+    {
+      "key": "field_start_override_page_title",
+      "label": "Override Page Title",
+      "name": "override_page_title",
+      "aria-label": "",
+      "type": "true_false",
+      "instructions": "",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "ui": 1,
+      "default_value": 0,
+      "message": "",
+      "ui_on_text": "",
+      "ui_off_text": ""
+    },
+    {
+      "key": "field_start_custom_page_title",
+      "label": "Custom Page Title",
+      "name": "custom_page_title",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": false,
+      "conditional_logic": [
+        [
+          {
+            "field": "field_start_override_page_title",
+            "operator": "==",
+            "value": "1"
+          }
+        ]
+      ],
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_start_page_tagline",
+      "label": "Page Tagline",
+      "name": "page_tagline",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Short supporting text under the page title.",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": "wpautop",
+      "default_value": "",
+      "maxlength": "",
+      "placeholder": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "side",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "display_title": "",
+  "allow_ai_access": false,
+  "ai_description": "",
+  "local_file": "/Users/tapps/_dev/wordpress/foursuitcasesandadream/app/public/wp-content/plugins/start-components/acf-json/group_start_page_header.json"
+}

@@ -1,0 +1,18 @@
+Bundled license information:
+
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.ESI5P3UH.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.WOJAFYXB.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.U6B4Y4O7.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.KNQBIPHQ.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.T4BDDOW4.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.KSM2764E.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.ECCU7KNP.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.B4LYVZ2Y.js:
+  /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
+
+lit-html/directive-helpers.js:
+  /**
+   * @license
+   * Copyright 2020 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */

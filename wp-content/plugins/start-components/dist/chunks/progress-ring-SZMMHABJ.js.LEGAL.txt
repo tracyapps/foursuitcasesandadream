@@ -1,0 +1,6 @@
+Bundled license information:
+
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.EJERQQPZ.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.3JG5MRIR.js:
+@web.awesome.me/webawesome-pro/dist/components/progress-ring/progress-ring.js:
+  /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */

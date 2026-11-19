@@ -1,0 +1,3 @@
+/* WordPress 7.1 has no supported setting for omitting this built-in tab.
+   Isolate this compatibility selector and cover it with a browser check. */
+.block-editor-inserter__menu [role="tab"][id$="-patterns"] { display: none !important; }

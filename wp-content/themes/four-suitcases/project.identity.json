@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "template": "client-v2",
+  "projectId": "7cd7b280-9272-46fc-b42c-bf5cdeae9e87",
+  "client": {
+    "displayName": "Four Suitcases and a Dream"
+  },
+  "theme": {
+    "name": "Four Suitcases - custom theme",
+    "slug": "four-suitcases",
+    "prefix": "foursuitcases"
+  }
+}

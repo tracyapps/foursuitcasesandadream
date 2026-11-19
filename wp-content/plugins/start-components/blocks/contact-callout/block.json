@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "start/contact-callout",
+  "version": "0.1.0",
+  "title": "Contact callout",
+  "description": "A ready-to-use contact section, available directly as a block.",
+  "category": "text",
+  "icon": "email",
+  "keywords": ["reusable", "section", "contact"],
+  "textdomain": "start-components",
+  "attributes": {
+    "heading": { "type": "string", "default": "Let’s talk" },
+    "content": { "type": "string", "default": "Tell us what you have in mind." },
+    "email": { "type": "string", "default": "" }
+  },
+  "supports": { "html": false, "anchor": true, "customClassName": false },
+  "editorScript": "start-components-editor",
+  "style": "start-components",
+  "render": "file:./render.php"
+}

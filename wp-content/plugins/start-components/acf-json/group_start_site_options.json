@@ -1,0 +1,364 @@
+{
+  "key": "group_start_site_options",
+  "title": "Site Options",
+  "fields": [
+    {
+      "key": "field_start_options_tab_content",
+      "label": "Content",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0
+    },
+    {
+      "key": "field_start_copyright_text",
+      "label": "Copyright Text",
+      "name": "copyright_text",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Use [year] for the current year.",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "Copyright [year]",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_start_contact_info",
+      "label": "Contact Info",
+      "name": "contact_info",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "visual",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "",
+      "delay": 0
+    },
+    {
+      "key": "field_start_options_tab_social",
+      "label": "Social",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0
+    },
+    {
+      "key": "field_start_social_links",
+      "label": "Social Links",
+      "name": "social_links",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "table",
+      "button_label": "Add Social Link",
+      "sub_fields": [
+        {
+          "key": "field_start_social_service",
+          "label": "Service",
+          "name": "service",
+          "aria-label": "",
+          "type": "select",
+          "instructions": "",
+          "required": false,
+          "conditional_logic": false,
+          "wrapper": {
+            "width": "25",
+            "class": "",
+            "id": ""
+          },
+          "choices": {
+            "email": "Email",
+            "facebook": "Facebook",
+            "instagram": "Instagram"
+          },
+          "multiple": 0,
+          "allow_null": 0,
+          "default_value": "",
+          "ui": 0,
+          "ajax": 0,
+          "placeholder": "",
+          "return_format": "value",
+          "create_options": 0,
+          "save_options": 0,
+          "parent_repeater": "field_start_social_links"
+        },
+        {
+          "key": "field_start_social_text",
+          "label": "Link Text",
+          "name": "link_text",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": false,
+          "conditional_logic": false,
+          "wrapper": {
+            "width": "25",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "parent_repeater": "field_start_social_links"
+        },
+        {
+          "key": "field_start_social_url",
+          "label": "URL",
+          "name": "url",
+          "aria-label": "",
+          "type": "url",
+          "instructions": "",
+          "required": false,
+          "conditional_logic": false,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "parent_repeater": "field_start_social_links"
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "rows_per_page": 20,
+      "collapsed": ""
+    },
+    {
+      "key": "field_start_options_tab_images",
+      "label": "Images",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0
+    },
+    {
+      "key": "field_start_default_thumbnail",
+      "label": "Default Post Thumbnail",
+      "name": "default_post_thumbnail_id",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "id",
+      "preview_size": "medium",
+      "library": "all",
+      "min_width": 0,
+      "min_height": 0,
+      "min_size": 0,
+      "max_width": 0,
+      "max_height": 0,
+      "max_size": 0,
+      "mime_types": ""
+    },
+    {
+      "key": "field_start_options_tab_excerpts",
+      "label": "Excerpts",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0
+    },
+    {
+      "key": "field_start_excerpt_length",
+      "label": "Excerpt Length",
+      "name": "excerpt_length",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "33",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 28,
+      "min": 1,
+      "step": 1,
+      "max": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_start_excerpt_length_unit",
+      "label": "Excerpt Unit",
+      "name": "excerpt_length_unit",
+      "aria-label": "",
+      "type": "button_group",
+      "instructions": "",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "33",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "words": "Words",
+        "chars": "Characters"
+      },
+      "default_value": "words",
+      "allow_null": 0,
+      "return_format": "value",
+      "layout": "horizontal"
+    },
+    {
+      "key": "field_start_excerpt_link_text",
+      "label": "Read More Text",
+      "name": "excerpt_link_text",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "34",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "Read more",
+      "maxlength": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_start_options_tab_theme",
+      "label": "Theme",
+      "name": "",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 0
+    },
+    {
+      "key": "field_start_theme_mode_default",
+      "label": "Default Theme Mode",
+      "name": "theme_mode_default",
+      "aria-label": "",
+      "type": "button_group",
+      "instructions": "Visitors can override this with the theme toggle when enabled.",
+      "required": false,
+      "conditional_logic": false,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "system": "System",
+        "light": "Light",
+        "dark": "Dark"
+      },
+      "default_value": "system",
+      "allow_null": 0,
+      "return_format": "value",
+      "layout": "horizontal"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "start-site-options"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Client-facing settings for global content and behavior.",
+  "show_in_rest": 0,
+  "display_title": "",
+  "allow_ai_access": false,
+  "ai_description": "",
+  "local_file": "/Users/tapps/_dev/wordpress/foursuitcasesandadream/app/public/wp-content/plugins/start-components/acf-json/group_start_site_options.json"
+}

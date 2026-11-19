@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "projectId": "7cd7b280-9272-46fc-b42c-bf5cdeae9e87",
+  "client": {
+    "displayName": "Four Suitcases and a Dream"
+  },
+  "wordpress": {
+    "provider": "localwp",
+    "siteId": "AvIMAj5j5",
+    "publicRoot": "/Users/tapps/_dev/wordpress/foursuitcasesandadream/app/public"
+  },
+  "theme": {
+    "name": "foursuitcasesandadream",
+    "slug": "client-site",
+    "prefix": "clientsite"
+  },
+  "customThemes": [
+    "four-suitcases"
+  ],
+  "customPlugins": [
+    "start-components"
+  ],
+  "site": {
+    "timezone": "America/Chicago"
+  },
+  "editor": {
+    "corePatterns": false,
+    "remotePatterns": false,
+    "reusablePatterns": []
+  }
+}

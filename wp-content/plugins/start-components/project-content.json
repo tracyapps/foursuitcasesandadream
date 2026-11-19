@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "projectId": "7cd7b280-9272-46fc-b42c-bf5cdeae9e87",
+  "selection": {
+    "version": 1,
+    "groups": {
+      "group_start_site_options": true,
+      "group_start_page_header": true,
+      "group_start_block_hero": true
+    },
+    "tabs": {
+      "field_start_options_tab_content": true,
+      "field_start_options_tab_social": true,
+      "field_start_options_tab_images": true,
+      "field_start_options_tab_excerpts": true,
+      "field_start_options_tab_theme": true
+    },
+    "postTypes": [],
+    "taxonomies": [],
+    "meta": [],
+    "business": {
+      "enabled": true,
+      "name": "Four Suitcases and a Dream",
+      "description": "Family vacation planning for Disney destinations, cruises, and national parks, with support for autistic travelers, food allergies, gluten-free dining, and access needs at sea.",
+      "telephone": "",
+      "address": "",
+      "kind": "Organization"
+    },
+    "appearance": {
+      "logoId": 0,
+      "darkMode": true,
+      "stickyHeader": true,
+      "siteSearch": true
+    }
+  }
+}

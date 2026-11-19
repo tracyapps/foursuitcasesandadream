@@ -1,0 +1,7 @@
+{
+ "apiVersion":3,"name":"start/design-element","version":"0.2.0","title":"Design Component","category":"design","icon":"art","description":"A curated Web Awesome component with a native fallback.","textdomain":"start-components",
+ "attributes":{"kind":{"type":"string","default":"button"},"label":{"type":"string","default":"Learn more"},"content":{"type":"string","default":""},"href":{"type":"string","default":""},"value":{"type":"number","default":50},"icon":{"type":"string","default":"star"}},
+ "supports":{"html":false,"anchor":true,"customClassName":false},
+ "styles":[{"name":"default","label":"Default","isDefault":true},{"name":"outline","label":"Outline"}],
+ "editorScript":"start-components-editor","viewScriptModule":"start-components-elements","style":"start-components","render":"file:./render.php"
+}

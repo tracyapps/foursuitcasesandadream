@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "start/disclosure",
+  "version": "0.1.0",
+  "title": "FAQ / Disclosure",
+  "category": "text",
+  "icon": "editor-help",
+  "description": "An expandable answer, with an accessible native fallback.",
+  "keywords": [
+    "faq",
+    "answer",
+    "accordion"
+  ],
+  "textdomain": "start-components",
+  "attributes": {
+    "summary": {
+      "type": "string",
+      "default": "How can we help?"
+    },
+    "content": {
+      "type": "string",
+      "default": "Add an answer here."
+    },
+    "open": {
+      "type": "boolean",
+      "default": false
+    },
+    "className": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "customClassName": false
+  },
+  "styles": [
+    {
+      "name": "outline",
+      "label": "Outline",
+      "isDefault": true
+    },
+    {
+      "name": "accent",
+      "label": "Soft accent"
+    }
+  ],
+  "editorScript": "start-components-editor",
+  "viewScript": "start-components-details",
+  "style": "start-components",
+  "render": "file:./render.php"
+}

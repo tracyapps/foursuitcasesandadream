@@ -1,0 +1,6 @@
+Bundled license information:
+
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.3ORVSTUO.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.3PMSNIAM.js:
+@web.awesome.me/webawesome-pro/dist/components/progress-bar/progress-bar.js:
+  /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */

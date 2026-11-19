@@ -1,0 +1,5 @@
+Bundled license information:
+
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.S7GU24DN.js:
+@web.awesome.me/webawesome-pro/dist/chunks/chunk.GB3TYL3J.js:
+  /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */

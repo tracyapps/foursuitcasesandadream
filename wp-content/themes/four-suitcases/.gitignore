@@ -1,0 +1,7 @@
+node_modules/
+.start-build-lock
+assets/.dist-next/
+assets/.dist-before/
+.theme-next.json
+.env
+.npmrc
