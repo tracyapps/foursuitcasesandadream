@@ -151,17 +151,17 @@
 	}
 
 	:is(strong,.travel-postcard__greeting) {
-		position: relative;
 		z-index: 1;
 	}
 
 	strong {
+		position: relative;
 		font: 600 clamp(1.55rem, 3.2vw, 3rem)/1 var(--font-serif);
 	}
 }
 
 .travel-postcard__greeting {
-	position: absolute !important;
+	position: absolute;
 	top: 1rem;
 	left: 1rem;
 	font: 400 clamp(1.5rem, 2.7vw, 2.5rem)/1 var(--font-script);
@@ -193,6 +193,60 @@
 	color: #482451;
 	cursor: pointer;
 	font: 650 .875rem/1 var(--font-sans);
+}
+
+@media (max-width: 450px) {
+	.travel-v2-cards--postcards {
+		.travel-destination-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.travel-postcard {
+			grid-template-columns: minmax(0, 1fr);
+			overflow-wrap: anywhere;
+		}
+
+		.travel-destination__face {
+			grid-template-columns: minmax(0, 1fr);
+			align-content: start;
+		}
+
+		.travel-destination__copy {
+			padding-block-end: .85rem;
+		}
+
+		.travel-postcard__address {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			align-items: center;
+			gap: .5rem;
+			margin: 0 .85rem;
+			padding: .7rem 0;
+			border-inline-start: 0;
+			border-block-start: 2px dotted #9c887c;
+
+			img {
+				width: min(74%, 3rem);
+			}
+		}
+
+		.travel-destination.is-flippable {
+			.travel-postcard__front {
+				aspect-ratio: auto;
+				grid-template: 1fr / minmax(0, 1fr);
+				row-gap: .35rem;
+				padding: 1rem 1rem 4rem;
+			}
+
+			.travel-destination__face {
+				padding-block-end: 4.25rem;
+			}
+
+			.travel-postcard__greeting {
+				position: relative;
+				inset: auto;
+			}
+		}
+	}
 }
 
 /********************************************************************************** travel tags **/
