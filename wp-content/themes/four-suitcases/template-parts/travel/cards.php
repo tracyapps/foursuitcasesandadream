@@ -1,14 +1,15 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 $layout = foursuitcases_travel_choice( 'layout', array( 'prints', 'postcards', 'tags', 'tickets' ), 'prints' );
+$cards = array_filter( (array) get_field( 'cards' ), 'is_array' );
+$column_limit = max( 1, count( $cards ) );
 $palette = foursuitcases_travel_palette( get_field( 'palette' ) );
 foursuitcases_travel_open( 'cards', $block, $layout );
 ?>
 <div class="travel-inner">
 	<header class="travel-section-intro" data-travel-protect><?php foursuitcases_travel_intro(); ?><?php if ( 'tags' !== $layout ) { foursuitcases_travel_compass( 'intro' ); } ?></header>
 	<div class="travel-destination-grid">
-		<?php foreach ( (array) get_field( 'cards' ) as $index => $card ) :
-			if ( ! is_array( $card ) ) { continue; }
+		<?php foreach ( $cards as $index => $card ) :
 			$card = start_travel_destination_card( $card );
 			$photo = $card['photo'] ?? 0;
 			$link = $card['link'] ?? array();
@@ -17,9 +18,17 @@ foursuitcases_travel_open( 'cards', $block, $layout );
 			$caption = $card['caption'] ?? '';
 			$kicker = $card['kicker'] ?? '';
 			$orientation = $card['orientation'] ?? 'auto';
-			if ( ! in_array( $orientation, array( 'horizontal', 'vertical' ), true ) ) {
-				$dimensions = is_numeric( $photo ) ? wp_get_attachment_metadata( (int) $photo ) : ( $photo && preg_match( '/^[a-z0-9-]+$/D', $photo ) ? wp_getimagesize( get_theme_file_path( 'assets/travel/' . $photo . '.webp' ) ) : array() );
-				$orientation = ( $dimensions['height'] ?? $dimensions[1] ?? 0 ) > ( $dimensions['width'] ?? $dimensions[0] ?? 0 ) * 1.02 ? 'vertical' : 'horizontal';
+			$auto_orientation = ! in_array( $orientation, array( 'horizontal', 'vertical' ), true );
+			$dimensions = array();
+			if ( is_numeric( $photo ) && ( $auto_orientation || 'prints' === $layout ) ) {
+				$dimensions = wp_get_attachment_metadata( (int) $photo );
+			} elseif ( $auto_orientation && $photo && preg_match( '/^[a-z0-9-]+$/D', $photo ) ) {
+				$dimensions = wp_getimagesize( get_theme_file_path( 'assets/travel/' . $photo . '.webp' ) );
+			}
+			$width = $dimensions['width'] ?? $dimensions[0] ?? 0;
+			$height = $dimensions['height'] ?? $dimensions[1] ?? 0;
+			if ( $auto_orientation ) {
+				$orientation = $height > $width * 1.02 ? 'vertical' : 'horizontal';
 			}
 			$rotation = array( -3, 2.5, -1.5, 3, -2.5, 1.5 )[ $index % 6 ];
 			?>
@@ -33,7 +42,22 @@ foursuitcases_travel_open( 'cards', $block, $layout );
 				<?php endif; ?>
 				<div class="travel-destination__face">
 					<?php if ( 'prints' === $layout ) : ?>
-						<?php foursuitcases_travel_print( $photo, $caption, 'travel-destination__print', $rotation, array( 'alt' => '', 'sizes' => '(max-width: 640px) 90vw, 32vw' ) ); ?>
+						<?php
+						$attributes = array( 'alt' => '', 'sizes' => '(max-width: 640px) 90vw, 32vw' );
+						// The print crops to 4:4.4, so a wide photo needs more pixels than the visible slot.
+						$cover_factor = $height ? 1.1 * $width / $height : 1;
+						if ( is_numeric( $photo ) && $cover_factor > 1 ) {
+							$attributes['class'] = 'travel-destination__cropped-photo';
+							$attributes['sizes'] = sprintf(
+								'(max-width: 42rem) %.2Fvw, (max-width: 64rem) %.2Fvw, (max-width: 85rem) %.2Fvw, %.2Fvw',
+								90 * $cover_factor,
+								90 * $cover_factor / min( 2, $column_limit ),
+								90 * $cover_factor / min( 3, $column_limit ),
+								90 * $cover_factor / min( 4, $column_limit )
+							);
+						}
+						foursuitcases_travel_print( $photo, $caption, 'travel-destination__print', $rotation, $attributes );
+						?>
 					<?php elseif ( 'postcards' !== $layout ) : ?>
 						<div class="travel-destination__photo"><?php foursuitcases_travel_image( $photo, array( 'alt' => '' ) ); ?>
 						<?php if ( ! empty( $card['clip'] ) ) : ?><video muted loop playsinline preload="none" aria-hidden="true" data-src="<?php echo esc_url( wp_get_attachment_url( $card['clip'] ) ); ?>"></video><?php endif; ?></div>

@@ -23,7 +23,14 @@
 	padding-block: 0;
 	--travel-accent: #ffd166;
 	--pass-bg: #ffd166;
-	--pass-text: #2b1d07;
+	--pass-text: #fffaf0;
+
+	&.travel-section {
+		color: #fffaf0;
+		.travel-pass-button {
+			color: #000;
+		}
+	}
 }
 
 .travel-hero-grid {

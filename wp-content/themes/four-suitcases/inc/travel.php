@@ -38,6 +38,28 @@ function foursuitcases_travel_image( $image, $attributes = array(), $size = 'lar
 	echo '>';
 }
 
+// Keep explicit crop-aware sizes on lazy destination photos. Core adds auto at both stages.
+add_filter( 'wp_get_attachment_image_attributes', function ( $attributes ) {
+	if ( str_contains( $attributes['class'] ?? '', 'travel-destination__cropped-photo' ) && isset( $attributes['sizes'] ) ) {
+		$attributes['sizes'] = preg_replace( '/^auto,\s*/i', '', $attributes['sizes'] );
+	}
+	return $attributes;
+} );
+
+add_filter( 'wp_content_img_tag', function ( $image ) {
+	if ( ! str_contains( $image, 'travel-destination__cropped-photo' ) ) {
+		return $image;
+	}
+	$tag = new WP_HTML_Tag_Processor( $image );
+	if ( $tag->next_tag( 'IMG' ) && $tag->has_class( 'travel-destination__cropped-photo' ) ) {
+		$sizes = $tag->get_attribute( 'sizes' );
+		if ( is_string( $sizes ) ) {
+			$tag->set_attribute( 'sizes', preg_replace( '/^auto,\s*/i', '', $sizes ) );
+		}
+	}
+	return $tag->get_updated_html();
+} );
+
 function foursuitcases_travel_tag( $label ) {
 	$label = trim( (string) $label );
 	return '' === $label ? array() : array( 'data-tag' => $label );
